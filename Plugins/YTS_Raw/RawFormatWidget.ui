@@ -94,6 +94,12 @@
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
           </spacer>
          </item>
         </layout>
@@ -139,7 +145,7 @@
             <double>1.000000000000000</double>
            </property>
            <property name="maximum">
-            <double>60.000000000000000</double>
+            <double>300.000000000000000</double>
            </property>
            <property name="value">
             <double>30.000000000000000</double>
