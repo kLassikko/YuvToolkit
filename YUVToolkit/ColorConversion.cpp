@@ -108,7 +108,7 @@ void ColorConversion(const Frame& in, Frame& out)
 				ok = true;
 			}
 			sws_freeContext( ctx );
-		}		
+		}
 	}
 	
 	if (!ok)
