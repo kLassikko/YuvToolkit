@@ -308,7 +308,8 @@ QList<VideoView*> MainWindow::openFiles( const QStringList& fileList )
 		if (fName.right(4).compare(".yts", Qt::CaseInsensitive) == 0)
 		{
 			openScript(fName, false);
-		}else
+		}
+		else
 		{
 			fileList2.append(fName);
 		}
@@ -442,7 +443,8 @@ void MainWindow::on_action_Close_triggered()
 	if (m_ActiveVideoView)
 	{
 		vv = m_ActiveVideoView;
-	}else if (m_VideoViewList->size()>0)
+	}
+	else if (m_VideoViewList->size()>0)
 	{
 		vv = m_VideoViewList->last();
 	}
@@ -450,7 +452,8 @@ void MainWindow::on_action_Close_triggered()
 	if (vv)
 	{
 		closeFile(vv);
-	}else
+	}
+	else
 	{
 		QMainWindow::close();
 	}
@@ -612,7 +615,8 @@ QScriptValue TextFileConstructor(QScriptContext*context,QScriptEngine*engine)
 
 void MainWindow::openScript( QString strPath, bool debug )
 {
-	if (m_Engine) {
+	if (m_Engine)
+	{
 		delete m_Engine;
 		m_Engine = NULL;
 	}
@@ -752,7 +756,8 @@ void MainWindow::autoResizeWindow()
 				qMin(pos().y(), screen.bottom()-newSize.height()));
 		}
 		// adjustSize();
-	}else
+	}
+	else
 	{
 		resize(MINIMUM_WIDTH, MINIMUM_HEIGHT);
 	}
@@ -825,7 +830,8 @@ void MainWindow::on_action_Step_Forward_triggered()
 	if (sinceLastStep<100)
 	{
 		stepVideo(5);
-	}else
+	}
+	else
 	{
 		stepVideo(1);
 	}
@@ -838,7 +844,8 @@ void MainWindow::on_action_Step_Back_triggered()
 	if (sinceLastStep<100)
 	{
 		stepVideo(-5);
-	}else
+	}
+	else
 	{
 		stepVideo(-1);
 	}
@@ -850,7 +857,8 @@ void MainWindow::on_action_Step_Forward_Fast_triggered()
 	if (sinceLastStep<100)
 	{
 		stepVideo(20);
-	}else
+	}
+	else
 	{
 		stepVideo(10);
 	}
@@ -862,7 +870,8 @@ void MainWindow::on_action_Step_Back_Fast_triggered()
 	if (sinceLastStep<100)
 	{
 		stepVideo(-20);
-	}else
+	}
+	else
 	{
 		stepVideo(-10);
 	}
@@ -944,7 +953,8 @@ void MainWindow::OnTimer()
 			}
 
 		}
-	}else
+	}
+	else
 	{
 		m_TimeLabel1->setText("   ");
 
@@ -959,7 +969,8 @@ void MainWindow::OnTimer()
 		float renderSpeed = m_VideoViewList->GetRenderThread()->GetSpeedRatio();
 		QTextStream(&str) << QString("%1").arg(renderSpeed, 0, 'f', 2) << " x";
 		m_RenderSpeedLabel->setText(str);
-	}else
+	}
+	else
 	{
 		unsigned int pts = status.seekingPTS;
 		if (pts != INVALID_PTS)
@@ -967,7 +978,8 @@ void MainWindow::OnTimer()
 			str.clear();
 			QTextStream(&str) << "Seeking " << pts << " ms";
 			m_RenderSpeedLabel->setText(str);
-		}else
+		}
+		else
 		{
 			m_RenderSpeedLabel->setText("Paused");
 		}
@@ -983,7 +995,8 @@ void MainWindow::OnTimer()
 			ui.action_Play_Pause->setIcon(icon);
 			m_IsPlaying = true;
 		}
-	}else
+	}
+	else
 	{
 		if (m_IsPlaying)
 		{
@@ -1174,7 +1187,8 @@ void MainWindow::contextMenuEvent( QContextMenuEvent *event )
 		menu.addSeparator();
 		menu.addAction(ui.action_About);
 		menu.exec(event->globalPos());
-	}else
+	}
+	else
 	{
 		QMenu* menu = m_ActiveVideoView->GetMenu();
 		if (menu)
@@ -1267,10 +1281,12 @@ void MainWindow::OnColorActionTriggered( QAction* a )
 	if (a == ui.action_Y)
 	{
 		plane = PLANE_Y;
-	}else if (a == ui.action_U)
+	}
+	else if (a == ui.action_U)
 	{
 		plane = PLANE_U;
-	}else if (a == ui.action_V)
+	}
+	else if (a == ui.action_V)
 	{
 		plane = PLANE_V;
 	}
@@ -1323,13 +1339,15 @@ void MainWindow::updateSelectionSlider()
 	{
 		m_Slider->SetSelectionTo(-1);
 		m_Slider->SetSelectionFrom(0);
-	}else
+	}
+	else
 	{
 		m_Slider->SetSelectionFrom(status.selectionFrom/SLIDER_STEP_MS);
 		if (status.selectionTo == INVALID_PTS)
 		{
 			m_Slider->SetSelectionTo(m_Slider->maximum());
-		}else
+		}
+		else
 		{
 			m_Slider->SetSelectionTo(status.selectionTo/SLIDER_STEP_MS);
 		}
@@ -1354,7 +1372,8 @@ void MainWindow::OnVideoViewListChanged()
 	if (m_VideoViewList->size() == 1)
 	{
 		m_ActionsButton->setMenu(m_VideoViewList->at(0)->GetMenu());
-	}else
+	}
+	else
 	{
 		m_ActionsButton->setMenu(ui.menu_Actions);
 	}
@@ -1425,7 +1444,8 @@ QVariant MainWindow::getSetting( QString s)
 	if (settings.contains(s))
 	{
 		return settings.value(s, NULL);
-	}else
+	}
+	else
 	{
 		return QVariant();
 	}
@@ -1439,7 +1459,8 @@ void MainWindow::setSetting( QString s, QVariant v)
 	if (v.isNull())
 	{
 		settings.remove(s);
-	}else
+	}
+	else
 	{
 		settings.setValue(s, v);
 	}
@@ -1475,9 +1496,13 @@ void MainWindow::fullscreen()
 	if (0)
 	{
 		if (this->isFullScreen())
+		{
 			this->showNormal();
-		else		
+		}
+		else
+		{
 			this->showFullScreen();
+		}
 	}
 }
 

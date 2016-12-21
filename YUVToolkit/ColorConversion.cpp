@@ -73,12 +73,14 @@ void ColorConversion(const Frame& in, Frame& out)
 		color_in = YV12;
 		data_in[2] = data_in[1]+format_in->Width()/2;
 		step_in[2] = step_in[1];
-	}else if (color_in == IMC4)
+	}
+	else if (color_in == IMC4)
 	{
 		color_in = I420;
 		data_in[2] = data_in[1]+format_in->Width()/2;
 		step_in[2] = step_in[1];
-	}else if (color_in == YVYU)
+	}
+	else if (color_in == YVYU)
 	{
 		// Special case since ffmpeg converter doesn't have this by default
 		// Swap chroma plans

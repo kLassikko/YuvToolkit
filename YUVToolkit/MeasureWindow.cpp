@@ -66,7 +66,8 @@ QVariant MeasureResultsModel::data( const QModelIndex &index, int role /*= Qt::D
 					if (res.op.hasResults[plane])
 					{
 						return QString("%1").arg(res.op.results[plane], 0, 'f', 2);
-					}else
+					}
+					else
 					{
 						return QString("");
 					}
@@ -108,7 +109,8 @@ QVariant MeasureResultsModel::headerData( int section, Qt::Orientation orientati
 				case 2:
 					return QString("3");
 				}
-			}else {
+			}
+			else {
 				QString header = m_MeasureNameRows.at(section/4);
 				int plane = section%4;
 				switch (plane)
@@ -364,7 +366,8 @@ void MeasureWindow::UpdateLabels()
 			VideoView* vv = m_VideoViewList->find(m_SourceList.at(i));
 			labels[i]->setText(vv->GetTitle());
 			labels[i]->setToolTip(vv->GetTitle());
-		}else
+		}
+		else
 		{
 			labels[i]->setText("");
 			labels[i]->setToolTip("");
@@ -376,7 +379,8 @@ void MeasureWindow::UpdateLabels()
 		if (m_SourceList.size()>2)
 		{
 			labels[i]->show();
-		}else
+		}
+		else
 		{
 			labels[i]->hide();
 		}

@@ -110,7 +110,8 @@ void SourceThread::ReadFrames()
 		{
 			frame = m_FramePool->Get();
 			EnsureFrameFormat(frame, info.format);
-		}else
+		}
+		else
 		{
 			frame = m_FramePool->Get();
 			frameOrig = m_FrameOrig;
@@ -130,7 +131,8 @@ void SourceThread::ReadFrames()
 		{
 			res = m_Source->GetFrame(frameOrig, m_Status.seekingPTS);
 			ColorConversion(*frameOrig, *frame);
-		}else
+		}
+		else
 		{
 			res = m_Source->GetFrame(frame, m_Status.seekingPTS);
 		}
@@ -151,12 +153,14 @@ void SourceThread::ReadFrames()
 				m_SourceReset = false;
 				emit sourceReset();
 			}
-		}else
+		}
+		else
 		{
 			if (res == END_OF_FILE)
 			{
 				INFO_LOG("Source %d GetFrame returns END_OF_FILE, seek %X", m_ViewID, m_Status.seekingPTS);
-			}else
+			}
+			else
 			{
 				ERROR_LOG("Source %d GetFrame returns error %d, seek %X", m_ViewID, res, m_Status.seekingPTS);
 			}

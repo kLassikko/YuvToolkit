@@ -98,15 +98,18 @@ void CreateColorMap( FramePtr frame, DistMapPtr distMap, int width, int height, 
 			if (v>=upperRange)
 			{
 				d[x] = upperColor;
-			}else if (v<=lowerRange)
+			}
+			else if (v<=lowerRange)
 			{
 				d[x] = lowerColor;
-			}else
+			}
+			else
 			{
 				d[x] = colormap[(int)((upperRange-v)*rangeScale)+offset];
 			}
 		}
-	}else
+	}
+	else
 	{
 		for (int x=0; x<total; x++)
 		{
@@ -114,10 +117,12 @@ void CreateColorMap( FramePtr frame, DistMapPtr distMap, int width, int height, 
 			if (v>=upperRange)
 			{
 				d[x] = upperColor;
-			}else if (v<=lowerRange)
+			}
+			else if (v<=lowerRange)
 			{
 				d[x] = lowerColor;
-			}else
+			}
+			else
 			{
 				d[x] = colormap[(int)((v-lowerRange)*rangeScale)+offset];
 			}

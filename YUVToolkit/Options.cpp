@@ -18,7 +18,8 @@ Options::Options( QWidget *parent, Qt::WFlags flags ) : QDialog(parent, flags)
 	if ( SUCCEEDED( hr ) && pAARUI != NULL ) 
 	{
 		pAARUI->Release();
-	} else
+	}
+	else
 	{
 		showFileAssociation = false;
 	}
@@ -54,7 +55,8 @@ Options::Options( QWidget *parent, Qt::WFlags flags ) : QDialog(parent, flags)
 		if (enabledMeasures.contains(m))
 		{
 			item->setCheckState(Qt::Checked);
-		}else
+		}
+		else
 		{
 			item->setCheckState(Qt::Unchecked);
 		}
@@ -75,7 +77,8 @@ Options::Options( QWidget *parent, Qt::WFlags flags ) : QDialog(parent, flags)
 		QListWidgetItem* item = ui.measureList->item(0);
 		ui.measureList->setCurrentItem(item);
 		LoadMeasureOptions(item);
-	}else
+	}
+	else
 	{
 		LoadMeasureOptions(NULL);
 	}

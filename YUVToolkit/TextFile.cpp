@@ -7,9 +7,12 @@ void TextFile::close()
 
 TextFile::TextFile( QString fileName, bool write ) : QFile(fileName)
 {
-	if (write) {
+	if (write)
+	{
 		open(QIODevice::WriteOnly | QIODevice::Text);
-	}else {
+	}
+	else
+	{
 		open(QIODevice::ReadOnly | QIODevice::Text);
 	}
 	

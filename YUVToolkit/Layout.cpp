@@ -51,7 +51,7 @@ void Layout::UpdateGrid()
 		int viewWidth = (szClient.width()+1)/x;
 		int viewHeight = (szClient.height()+1)/y;
 		int area = 0;
-		for (int i=0; i<m_VideoList.size(); ++i) 
+		for (int i=0; i<m_VideoList.size(); ++i)
 		{
 			VideoView* vv = m_VideoList.at(i);
 			int w=viewWidth, h=viewHeight;
@@ -84,7 +84,7 @@ void Layout::UpdateGeometry()
 	m_ViewWidth = (szClient.width()+1)/m_CountX;
 	m_ViewHeight = (szClient.height()+1)/m_CountY;
 
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 

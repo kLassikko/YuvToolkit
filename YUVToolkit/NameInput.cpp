@@ -15,11 +15,13 @@ void NameInput::accept()
 {
 	username = ui.lineEdit->text();
 	if (username.isEmpty())
-		{
+	{
 			QMessageBox::information(this, "Warning...", "Dude! Please leave your name before starting the test!!", QMessageBox::Ok);
 	}
 	else
+	{
 		this->hide();
+	}
 }
 
 QString NameInput::getUserName()

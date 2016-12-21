@@ -106,7 +106,8 @@ int FormatImpl::Stride( int plane ) const
 	if (plane>=0 && plane<4)
 	{
 		return stride[plane];
-	}else
+	}
+	else
 	{
 		return 0;
 	}
@@ -226,7 +227,8 @@ size_t FormatImpl::PlaneSize( int plane )
 			if (stride[i] != 0)
 			{
 				plane_size[i] = stride[i]*vstride[i];
-			}else
+			}
+			else
 			{
 				plane_size[i] = 0;
 			}
@@ -238,7 +240,8 @@ size_t FormatImpl::PlaneSize( int plane )
 	if (plane>=0 && plane<4)
 	{
 		return plane_size[plane];
-	}else
+	}
+	else
 	{
 		return 0;
 	}
@@ -287,7 +290,8 @@ int FormatImpl::PlaneWidth( int plane )
 		if (plane == 0)
 		{
 			return width;
-		}else
+		}
+		else
 		{
 			return 0;
 		}
@@ -305,7 +309,8 @@ int FormatImpl::PlaneWidth( int plane )
 		if (plane == 0)
 		{
 			return width;
-		}else
+		}
+		else
 		{
 			return width/2;
 		}
@@ -322,7 +327,8 @@ int FormatImpl::PlaneHeight( int plane )
 		if (plane == 0)
 		{
 			return height;
-		}else
+		}
+		else
 		{
 			return 0;
 		}
@@ -340,7 +346,8 @@ int FormatImpl::PlaneHeight( int plane )
 		if (plane == 0)
 		{
 			return height;
-		}else
+		}
+		else
 		{
 			return height/2;
 		}
@@ -397,7 +404,8 @@ unsigned char* FrameImpl::Data( int plane ) const
 	if (plane>=0 && plane<4)
 	{
 		return data[plane];
-	}else
+	}
+	else
 	{
 		return 0;
 	}
@@ -506,7 +514,8 @@ void FrameImpl::Recyle( Frame *obj )
 	if (frame->pool)
 	{
 		frame->pool->Recycle(frame);
-	}else
+	}
+	else
 	{
 		delete obj;
 	}
@@ -896,7 +905,8 @@ FramePtr FramePool::Get()
 	if (m_CanGrow)
 	{
 		return FramePtr(new FrameImpl(this));
-	}else
+	}
+	else
 	{
 		return FramePtr(NULL);
 	}
@@ -1044,7 +1054,8 @@ void HostImpl::OpenFiles(QStringList fileList)
 	{
 		MainWindow* win = m_MainWindowList.at(0);
 		win->openFiles(fileList);
-	}else
+	}
+	else
 	{
 		m_InitFileList.append(fileList);
 	}

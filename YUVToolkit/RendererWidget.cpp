@@ -13,7 +13,8 @@ void RendererWidget::paintEvent( QPaintEvent* )
 	if (m_Renderer)
 	{
 
-	}else
+	}
+	else
 	{
 		QRect rcClient = this->rect();
 
@@ -105,7 +106,8 @@ void RendererWidget::mouseReleaseEvent( QMouseEvent* e )
 	if (m_Renderer)
 	{
 		layout->OnMouseReleaseEvent(e);
-	}else
+	}
+	else
 	{
 		QRect rc;
 		QRect rcClient = this->rect();

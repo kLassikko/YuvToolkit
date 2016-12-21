@@ -193,7 +193,7 @@ void ScoreWindow::initButton()
 void ScoreWindow::initSlider(bool slider_status)
 {
 	for (int i=0; i < NumOfConditions; i++)
-		{
+	{
 			SliderList[i]->setValue(0);
 			SliderList[i]->setDisabled(slider_status);
 			label_cur_selected_list[i]->setText("Not_rated");
@@ -261,13 +261,13 @@ QString ScoreWindow::getCurButtonResults(const QStringList& fileList)
 		else
 		{
 			SingleResult = "\"" + fName + "\":0"; 
-		};
+		}
 		if (i != NumOfConditions -1)
 		{
 			SingleResult.append(",");
-		};
+		}
 		Results.append(SingleResult);
-	};
+	}
 	Results.append("}\n");
 	return Results;
 }
@@ -310,7 +310,9 @@ QVariant ScoreWindow::shuffleList(QVariant origin, bool shuffle_scene, bool shuf
 	}
 	
 	if (shuffle_scene == true)
+	{
 		std::random_shuffle(c_videoList.begin(),c_videoList.end());
+	}
 	if (shuffle_video == true)
 		{
 			int len = origin.toList().size();
@@ -327,7 +329,9 @@ QVariant ScoreWindow::shuffleList(QVariant origin, bool shuffle_scene, bool shuf
 						c_videoList[i][j] = temp[j-1];
 				}
 				else
+				{
 					std::random_shuffle(c_videoList[i].begin(),c_videoList[i].end());
+				}
 			}
 	}
 

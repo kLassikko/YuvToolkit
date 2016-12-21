@@ -75,7 +75,8 @@ void ProcessThread::ProcessFrameQueue()
 
 			m_IsLastFrame = IsLastScene(scene);
 			WARNING_LOG("ProcessThread seeking %d done", status.seekingPTS);
-		}else
+		}
+		else
 		{
 			WARNING_LOG("ProcessThread seeking %d ... %d found", status.seekingPTS, scene->size());
 		}
@@ -105,7 +106,8 @@ void ProcessThread::ProcessFrameQueue()
 			{
 				return;
 			}
-		}else
+		}
+		else
 		{
 			ptsNext = GetNextPTS(sourceViewIds, m_LastPTS);
 			if (ptsNext == INVALID_PTS)
@@ -120,11 +122,13 @@ void ProcessThread::ProcessFrameQueue()
 						if (status.selectionFrom != INVALID_PTS)
 						{
 							m_Control->Seek(status.selectionFrom);
-						}else
+						}
+						else
 						{
 							m_Control->Seek(0);
 						}
-					}else
+					}
+					else
 					{
 						m_Control->PlayPause();
 					}
@@ -168,7 +172,8 @@ void ProcessThread::ProcessFrameQueue()
 					scene = GetHostImpl()->GetFrameList();
 				}
 				scene->append(frameToRender);
-			}else
+			}
+			else
 			{
 				// some frames missing
 				return;
@@ -195,7 +200,8 @@ void ProcessThread::ProcessFrameQueue()
 					}
 				}
 			}
-		}else
+		}
+		else
 		{
 			return;
 		}
@@ -261,7 +267,8 @@ FrameListPtr ProcessThread::FastSeekQueue( unsigned int pts, UintList sourceView
 			if (frame->Info(SEEKING_PTS).toUInt() != pts)
 			{
 				frameList.removeFirst();
-			}else
+			}
+			else
 			{
 				// Find if there are more frames of same PTS, it can happen when user change resolution or file format
 				int j = 0;

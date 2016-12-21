@@ -40,7 +40,8 @@ protected:
 			if (orientation() == Qt::Vertical)
 			{
 				setValue(QStyle::sliderValueFromPosition(minimum(),maximum(),event->x(),height(),0));
-			}else
+			}
+			else
 			{
 				setValue(QStyle::sliderValueFromPosition(minimum(),maximum(),event->x(),width(),0));
 			}

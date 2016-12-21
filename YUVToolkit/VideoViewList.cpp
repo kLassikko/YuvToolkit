@@ -91,7 +91,8 @@ void VideoViewList::CloseVideoView( VideoView* vv)
 		DestroyRenderer();
 
 		m_Control.Reset();
-	}else
+	}
+	else
 	{
 		PlaybackControl::Status status;
 		m_Control.GetStatus(&status);
@@ -167,10 +168,12 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 	if (m_SeekingPTS != INVALID_PTS)
 	{
 		pts = m_SeekingPTS;
-	}else if (m_Paused)
+	}
+	else if (m_Paused)
 	{
 		pts = m_CurrentPTS;
-	}else
+	}
+	else
 	{
 		// Get next pts to render
 		unsigned int minPTS = INVALID_PTS;
@@ -200,7 +203,8 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 		if (minPTS < INVALID_PTS)
 		{
 			pts = minPTS;
-		}else
+		}
+		else
 		{
 			pts = maxPTS;
 		}
@@ -222,7 +226,8 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 		if (vv->GetType() == PLUGIN_UNKNOWN)
 		{
 			shouldRender = false;
-		}else if (vv->GetType() == PLUGIN_SOURCE)
+		}
+		else if (vv->GetType() == PLUGIN_SOURCE)
 		{
 			VideoQueue::Frame* vqf = NULL;
 			Source* source = vv->GetSource();
@@ -249,7 +254,8 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 						seekingDone = false;
 					}
 				}
-			}else
+			}
+			else
 			{
 				// Some frames are black, will cause flickering
 				shouldRender = false;
@@ -313,7 +319,8 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 	if (m_Paused || m_SeekingPTS != INVALID_PTS)
 	{
 		renderPTS  = INVALID_PTS;
-	}else
+	}
+	else
 	{
 		renderPTS  = pts;
 	}
@@ -326,7 +333,8 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 class QThread3 : public QThread
 {
 public:
-	static void msleep(unsigned long msecs) {
+	static void msleep(unsigned long msecs)
+	{
 		QThread::msleep(msecs);
 	}
 };

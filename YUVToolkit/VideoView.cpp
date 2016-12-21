@@ -157,7 +157,8 @@ void VideoView::RepositionVideo(bool emitSignal)
 
 		m_SrcLeft = 0;
 		m_SrcTop = 0;			
-	}else
+	}
+	else
 	{
 		dstWidth = width()*m_ScaleNum/m_ScaleDen;
 		dstHeight = height()*m_ScaleNum/m_ScaleDen;
@@ -166,7 +167,8 @@ void VideoView::RepositionVideo(bool emitSignal)
 		{
 			dstLeft = rcClient.left() + (rcClient.width()-dstWidth)/2;
 			m_SrcLeft = 0;
-		}else
+		}
+		else
 		{
 			dstLeft = rcClient.left();
 			dstWidth = rcClient.width();
@@ -179,7 +181,8 @@ void VideoView::RepositionVideo(bool emitSignal)
 		{
 			dstTop = rcClient.top() + (rcClient.height()-dstHeight)/2;
 			m_SrcTop = 0;
-		}else
+		}
+		else
 		{
 			dstTop = rcClient.top();
 			dstHeight = rcClient.height();
@@ -243,7 +246,8 @@ void VideoView::GetVideoSize( QSize& actual, QSize& display )
 	if (m_ScaleDen == 0 || m_ScaleNum == 0)
 	{
 		display = actual;
-	}else
+	}
+	else
 	{
 		display.setWidth(actual.width()*m_ScaleNum/m_ScaleDen);
 		display.setHeight(actual.height()*m_ScaleNum/m_ScaleDen);
@@ -380,7 +384,8 @@ Source* VideoView::GetSource()
 	if (m_SourceThread)
 	{
 		return m_SourceThread->GetSource();
-	}else
+	}
+	else
 	{
 		return NULL;
 	}
@@ -408,7 +413,8 @@ int VideoView::width()
 	if (m_SourceInfo.format)
 	{
 		return m_SourceInfo.format->Width();
-	}else
+	}
+	else
 	{
 		return 0;
 	}
@@ -420,7 +426,8 @@ int VideoView::height()
 	if (m_SourceInfo.format)
 	{
 		return m_SourceInfo.format->Height();
-	}else
+	}
+	else
 	{
 		return 0;
 	}

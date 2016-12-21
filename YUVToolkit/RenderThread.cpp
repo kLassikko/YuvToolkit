@@ -106,7 +106,8 @@ void RenderThread::Render()
 		nextScene = m_SceneQueue.takeFirst();
 
 		RenderFrames(nextScene, status.plane);
-	}else if (m_RenderFrames.size()== 0 && m_LastSourceFrames && m_LastSourceFrames->size()>0)
+	}
+	else if (m_RenderFrames.size()== 0 && m_LastSourceFrames && m_LastSourceFrames->size()>0)
 	{
 		// paused and render reset
 		RenderFrames(m_LastSourceFrames, status.plane);
@@ -248,7 +249,8 @@ void RenderThread::RenderFrames(FrameListPtr sourceFrames, YUV_PLANE plane)
 					}
 				}
 
-			}else
+			}
+			else
 			{
 				ColorConversion(*sourceFrame, *renderFrame);
 			}
@@ -278,7 +280,8 @@ void RenderThread::UpdateLayout()
 		{
 			m_Renderer->Deallocate(renderFrame);
 			i.remove();
-		}else
+		}
+		else
 		{
 			QRect srcRect = m_SrcRects.at(j);
 			float scaleX = renderFrame->Info(RENDER_SRC_SCALE_X).toFloat();
