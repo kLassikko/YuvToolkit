@@ -54,23 +54,23 @@ void ProcessThread::ProcessFrameQueue()
 {
 	PlaybackControl::Status status;
 	m_Control->GetStatus(&status);
-		
+
 	m_MutexSource.lock();
 	UintList sourceViewIds = m_SourceViewIds;
 	m_MutexSource.unlock();
 
-	bool completed = CleanAndCheckQueue(sourceViewIds);	
+	bool completed = CleanAndCheckQueue(sourceViewIds);
 
 	if (status.seekingPTS != INVALID_PTS)
 	{
 		bool allfound = true;
 		FrameListPtr scene = FastSeekQueue(status.seekingPTS, sourceViewIds, allfound);
-		
+
 		if (allfound)
 		{
 			m_LastPTS = status.seekingPTS;
 			m_Control->OnFrameProcessed(status.seekingPTS, status.seekingPTS);
-			
+
 			ProcessMeasures(scene, status.plane);
 
 			m_IsLastFrame = IsLastScene(scene);
@@ -80,7 +80,7 @@ void ProcessThread::ProcessFrameQueue()
 		{
 			WARNING_LOG("ProcessThread seeking %d ... %d found", status.seekingPTS, scene->size());
 		}
-				
+
 		emit sceneReady(scene, status.seekingPTS, true);
 
 		return;
@@ -141,12 +141,12 @@ void ProcessThread::ProcessFrameQueue()
 			}
 		}
 
-		FrameListPtr scene; 
+		FrameListPtr scene;
 		QMapIterator<unsigned int, FrameList > i(m_SourceFrames);
-		while (i.hasNext()) 
+		while (i.hasNext())
 		{
 			i.next();
-		
+
 			unsigned int viewID = i.key();
 			FrameList& frameList = m_SourceFrames[viewID];
 
@@ -183,7 +183,7 @@ void ProcessThread::ProcessFrameQueue()
 		if (scene && scene->size()>0)
 		{
 			m_Control->OnFrameProcessed(ptsNext, INVALID_PTS);
-			
+
 			ProcessMeasures(scene, status.plane);
 
 			emit sceneReady(scene, ptsNext, false);
@@ -247,7 +247,7 @@ bool ProcessThread::CleanAndCheckQueue(UintList& sourceViewIds)
 
 FrameListPtr ProcessThread::FastSeekQueue( unsigned int pts, UintList sourceViewIds, bool& completed )
 {
-	// Clean up queue tills seeking frame is found, 
+	// Clean up queue tills seeking frame is found,
 	// clean up so that source has buffer to fill-up
 	// return list of seeking frame
 	completed = true;
@@ -287,8 +287,8 @@ FrameListPtr ProcessThread::FastSeekQueue( unsigned int pts, UintList sourceView
 				{
 					frameList.removeFirst();
 					j--;
-				}				
-				
+				}
+
 				break;
 			}
 		}
@@ -362,7 +362,7 @@ unsigned int ProcessThread::GetNextPTS( UintList sourceViewIds, unsigned int cur
 		{
 			pts = frame->Info(NEXT_PTS).toUInt();
 		}
-		
+
 		ptsNext = qMin<unsigned int>(pts, ptsNext);
 	}
 	return ptsNext;
@@ -417,13 +417,13 @@ void ProcessThread::ProcessMeasures( FrameListPtr scene, YUV_PLANE plane )
 	QMap<QString, double> measureLowerRange;
 	QMap<QString, bool> measureBiggerValueIsBetter;
 
-	// Group the measure operations that have same 
+	// Group the measure operations that have same
 	// plugin/measure pointers and same sources
 	for (int i=0; i<m_MeasureRequests.size(); i++)
 	{
 		MeasureItem& item = m_MeasureRequests[i];
 
-		if (item.plugin != plugin || item.measure != measure || 
+		if (item.plugin != plugin || item.measure != measure ||
 			item.sourceViewId1 != sourceViewId1 || item.sourceViewId2 != sourceViewId2)
 		{
 			ProcessOperations(scene, plane, operations, viewIds,
@@ -435,10 +435,10 @@ void ProcessThread::ProcessMeasures( FrameListPtr scene, YUV_PLANE plane )
 			sourceViewId2 = item.sourceViewId2;
 		}
 
-		item.op.hasResults[PLANE_Y] = 
-			item.op.hasResults[PLANE_U] = 
-			item.op.hasResults[PLANE_V] = 
-			item.op.hasResults[PLANE_COLOR] = 
+		item.op.hasResults[PLANE_Y] =
+			item.op.hasResults[PLANE_U] =
+			item.op.hasResults[PLANE_V] =
+			item.op.hasResults[PLANE_COLOR] =
 			false;
 
 		if (item.showDistortionMap)
@@ -485,7 +485,7 @@ bool ProcessThread::IsLastScene( FrameListPtr scene )
 	return true;
 }
 
-void ProcessThread::ProcessOperations(FrameListPtr scene, YUV_PLANE plane, 
+void ProcessThread::ProcessOperations(FrameListPtr scene, YUV_PLANE plane,
 	QList<MeasureOperation*>& operations, QList<unsigned int>& viewIds,
 	Measure* measure, unsigned int sourceViewId1, unsigned int sourceViewId2)
 {
@@ -516,7 +516,7 @@ void ProcessThread::ProcessOperations(FrameListPtr scene, YUV_PLANE plane,
 
 				if (frame)
 				{
-					CreateColorMap(frame, op->distMap, op->distMapWidth, op->distMapHeight, 
+					CreateColorMap(frame, op->distMap, op->distMapWidth, op->distMapHeight,
 						info.upperRange, info.lowerRange, info.biggerValueIsBetter);
 
 					frame->SetInfo(VIEW_ID, viewIds.at(j));

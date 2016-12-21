@@ -98,7 +98,7 @@ void SourceThread::ReadFrames()
 				return;
 			}
 		}
-		
+
 
 		SourceInfo info;
 		m_Source->GetInfo(info);
@@ -115,7 +115,7 @@ void SourceThread::ReadFrames()
 		{
 			frame = m_FramePool->Get();
 			frameOrig = m_FrameOrig;
-			
+
 			m_FormatNew->SetColor(GetNativeFormat(c));
 			m_FormatNew->SetWidth(info.format->Width());
 			m_FormatNew->SetHeight(info.format->Height());
@@ -124,8 +124,8 @@ void SourceThread::ReadFrames()
 			EnsureFrameFormat(frame, m_FormatNew);
 			EnsureFrameFormat(frameOrig, info.format);
 		}
-		
-		// Get next frame or seek 
+
+		// Get next frame or seek
 		RESULT res = OK;
 		if (frameOrig)
 		{
@@ -136,7 +136,7 @@ void SourceThread::ReadFrames()
 		{
 			res = m_Source->GetFrame(frame, m_Status.seekingPTS);
 		}
-		
+
 
 		if (res == OK)
 		{
@@ -166,7 +166,7 @@ void SourceThread::ReadFrames()
 			}
 			m_EndOfFile = true;
 		}
-	}	
+	}
 }
 
 void SourceThread::EnsureFrameFormat( FramePtr frame, FormatPtr format )

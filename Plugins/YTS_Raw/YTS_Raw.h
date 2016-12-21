@@ -47,7 +47,7 @@ public:
 	virtual RESULT GetTimeStamps(QList<unsigned int>& timeStamps);
 	virtual RESULT SetTimeStamps(QList<unsigned int> timeStamps);
 	virtual unsigned int IndexToPTS(unsigned int frame_idx);
-	
+
 	virtual bool HasGUI();
 	virtual QWidget* CreateGUI(QWidget* parent);
 
@@ -61,7 +61,7 @@ protected:
 private:
 	double			m_FPS;
 	unsigned int	m_FrameIndex;
-	
+
 	unsigned int	m_NumFrames;
 	unsigned int	m_Duration;
 	QList<unsigned int> m_TimeStamps; // custom time stamps

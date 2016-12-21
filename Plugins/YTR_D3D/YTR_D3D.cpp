@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "..\..\YUVToolkit\BuildControl.h"
 
-#define RENDER_FREQ	60 
+#define RENDER_FREQ	60
 
 Q_EXPORT_PLUGIN2(YTR_D3D, YTR_D3DPlugin)
 
@@ -36,7 +36,7 @@ void YTR_D3DPlugin::ReleaseRenderer( Renderer* parent )
 
 
 
-YTR_D3D::YTR_D3D(Host* host, QWidget* widget, const QString& name) 
+YTR_D3D::YTR_D3D(Host* host, QWidget* widget, const QString& name)
 	: m_Host(host), D3DWidget(widget), m_NeedReset(false), m_ResetLastCheckedWidth(0), m_ResetLastCheckedHeight(0)
 {
 	QTimer *timer = new QTimer(widget);
@@ -113,7 +113,7 @@ RESULT YTR_D3D::RenderScene(const FrameList& frames)
 		scale_y = ((double)desc.Height)/height;
 	}
 
-	for (int i=0; i<frames.size(); ++i) 
+	for (int i=0; i<frames.size(); ++i)
 	{
 		FramePtr frame = frames.at(i);
 		if (!frame)
@@ -124,7 +124,7 @@ RESULT YTR_D3D::RenderScene(const FrameList& frames)
 		const QRect _srcRect = frame->Info(SRC_RECT).toRect();
 		const QRect _dstRect = frame->Info(DST_RECT).toRect();
 		IDirect3DSurface9* pSurface = (IDirect3DSurface9*) (frame->ExternData());
-		
+
 		RECT srcRectCopy = {_srcRect.left(), _srcRect.top(), _srcRect.right(), _srcRect.bottom()};
 		RECT dstRectCopy = {_dstRect.left(), _dstRect.top(), _dstRect.right(), _dstRect.bottom()};
 
@@ -139,15 +139,16 @@ RESULT YTR_D3D::RenderScene(const FrameList& frames)
 		if (RECT_IS_EMPTY(dstRect))
 		{
 			dstRect = NULL;
-		}else if (scale_x!=1 || scale_y != 1)
+		}
+		else if (scale_x!=1 || scale_y != 1)
 		{
 			dstRect->left *= scale_x;
 			dstRect->right *= scale_x;
 			dstRect->top *= scale_y;
-			dstRect->bottom *= scale_y;				
+			dstRect->bottom *= scale_y;
 		}
 
-		hr = d3DDevice->StretchRect(pSurface, srcRect, 
+		hr = d3DDevice->StretchRect(pSurface, srcRect,
 			pRT, dstRect, D3DTEXF_LINEAR);
 	}
 
@@ -201,7 +202,7 @@ RESULT YTR_D3D::Allocate( FramePtr& frame, FormatPtr sourceFormat )
 	frame->Format()->SetStride(3,0);
 
 	frame->Format()->SetColor(XRGB32);
-	
+
 	return OK;
 }
 
@@ -244,7 +245,7 @@ RESULT YTR_D3D::ReleaseFrame( FramePtr frame )
 	frame->SetData(3, 0);
 
 	IDirect3DSurface9* surface = (IDirect3DSurface9*)(frame->ExternData());
-	
+
 	HRESULT hr = surface->UnlockRect();
 	assert(SUCCEEDED(hr));
 
@@ -255,14 +256,15 @@ RESULT YTR_D3D::ReleaseFrame( FramePtr frame )
 
 RESULT YTR_D3D::Reset()
 {
-	HRESULT hr = ResetD3D();	
+	HRESULT hr = ResetD3D();
 
 	if (SUCCEEDED(hr))
 	{
 		m_NeedReset = false;
 
 		return OK;
-	}else
+	}
+	else
 	{
 		m_NeedReset = true;
 

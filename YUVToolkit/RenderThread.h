@@ -6,7 +6,7 @@ class RenderThread : public QThread
 {
 	Q_OBJECT;
 public:
-	
+
 	RenderThread(Renderer* renderer, PlaybackControl* c);
 	~RenderThread(void);
 
@@ -21,8 +21,8 @@ signals:
 	void sceneRendered(FrameListPtr scene, unsigned int pts, bool seeking);
 
 public slots:
-	void RenderScene(FrameListPtr scene, unsigned int pts, bool seeking); 
-	
+	void RenderScene(FrameListPtr scene, unsigned int pts, bool seeking);
+
 private slots:
 	void Render();
 

@@ -3,7 +3,7 @@
 
 #define COLOR_COUNT 17
 
-COLOR_FORMAT colors[COLOR_COUNT] = 
+COLOR_FORMAT colors[COLOR_COUNT] =
 {
 	I420,
 	YV12,
@@ -24,7 +24,7 @@ COLOR_FORMAT colors[COLOR_COUNT] =
 	BGR565,
 };
 
-QString color_names[COLOR_COUNT] = 
+QString color_names[COLOR_COUNT] =
 {
 	"I420/IYUV",
 	"YV12",
@@ -59,7 +59,7 @@ RawFormatWidget::RawFormatWidget(YTS_Raw* r, QWidget *parent) : QWidget(parent),
 	ui.Stride1->setText("0");
 	ui.Stride2->setText("0");
 	ui.Stride3->setText("0");
-	
+
 	ui.Width->setValidator(new QIntValidator(ui.Width));
 	ui.Height->setValidator(new QIntValidator(ui.Height));
 
@@ -104,7 +104,7 @@ void RawFormatWidget::showEvent( QShowEvent *event )
 	ui.Title->setText(rawSource->GetPath());
 	ui.Width->setText(QString::number(info.format->Width()));
 	ui.Height->setText(QString::number(info.format->Height()));
-	
+
 	int idx = 0;
 	for (int j=0; j<COLOR_COUNT; j++)
 	{

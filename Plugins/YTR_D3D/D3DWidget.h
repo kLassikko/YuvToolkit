@@ -11,7 +11,7 @@ class D3DWidget : public QWidget
 public:
 	D3DWidget(QWidget* parent);
 	virtual ~D3DWidget();
-	
+
 	QPaintEngine *paintEngine() const;
 	virtual void resizeEvent ( QResizeEvent* );
 

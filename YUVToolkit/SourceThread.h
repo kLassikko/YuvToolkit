@@ -43,14 +43,14 @@ private slots:
 private:
 	void run();
 	void EnsureFrameFormat(FramePtr frame, FormatPtr format);
-	
+
 private:
 	volatile int m_ViewID;
 	unsigned int m_LastSeekingPTS;
 	QString m_Path;
 	Source* m_Source;
 	volatile bool m_EndOfFile;
-	
+
 	FramePtr m_FrameOrig;
 	FormatPtr m_FormatNew;
 	FramePool* m_FramePool;

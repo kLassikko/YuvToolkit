@@ -37,7 +37,7 @@ void RenderThread::run()
 
 	WARNING_LOG("Render run cleaning up");
 
-	for (int i = 0; i < m_RenderFrames.size(); i++) 
+	for (int i = 0; i < m_RenderFrames.size(); i++)
 	{
 		FramePtr renderFrame = m_RenderFrames.at(i);
 		if (renderFrame)
@@ -100,7 +100,7 @@ void RenderThread::Render()
 	bool newFrame = (nextPTS != INVALID_PTS) && (nextIsSeeking || ( diffPts < m_RenderCounter*m_RenderInterval + m_RenderInterval/2 ));
 	FrameListPtr nextScene;
 	if (newFrame)
-	{	
+	{
 		nextPTS = m_PTSQueue.takeFirst();
 		nextIsSeeking = m_SeekingQueue.takeFirst();
 		nextScene = m_SceneQueue.takeFirst();
@@ -163,7 +163,7 @@ void RenderThread::RenderFrames(FrameListPtr sourceFrames, YUV_PLANE plane)
 {
 	FrameImpl tempFrame;
 
-	for (int i = 0; i < sourceFrames->size(); i++) 
+	for (int i = 0; i < sourceFrames->size(); i++)
 	{
 		FramePtr sourceFrameOrig = sourceFrames->at(i);
 		if (!sourceFrameOrig)
@@ -196,9 +196,9 @@ void RenderThread::RenderFrames(FrameListPtr sourceFrames, YUV_PLANE plane)
 				scaleY = ((float)format->PlaneHeight(plane))/format->Height();
 			}
 		}
-		
+
 		int pos = -1;
-		for (int k = 0; k < m_RenderFrames.size(); k++) 
+		for (int k = 0; k < m_RenderFrames.size(); k++)
 		{
 			FramePtr _frame = m_RenderFrames.at(k);
 			if (_frame && _frame->Info(VIEW_ID).toUInt() == viewID)
@@ -216,9 +216,9 @@ void RenderThread::RenderFrames(FrameListPtr sourceFrames, YUV_PLANE plane)
 
 		FramePtr& renderFrame = m_RenderFrames[pos];
 		// Deallocate if resolution changed
-		if (renderFrame && (sourceFrame->Format()->Width() != 
-			renderFrame->Format()->Width() || 
-			sourceFrame->Format()->Height() != 
+		if (renderFrame && (sourceFrame->Format()->Width() !=
+			renderFrame->Format()->Width() ||
+			sourceFrame->Format()->Height() !=
 			renderFrame->Format()->Height()))
 		{
 			m_Renderer->Deallocate(renderFrame);
@@ -230,7 +230,7 @@ void RenderThread::RenderFrames(FrameListPtr sourceFrames, YUV_PLANE plane)
 		{
 			m_Renderer->Allocate(renderFrame, sourceFrame->Format());
 		}
-		
+
 		renderFrame->SetInfo(VIEW_ID, viewID);
 		renderFrame->SetInfo(RENDER_SRC_SCALE_X, scaleX);
 		renderFrame->SetInfo(RENDER_SRC_SCALE_Y, scaleY);
@@ -266,7 +266,7 @@ void RenderThread::UpdateLayout()
 
 	// Find frames without layout info and delete them
 	QMutableListIterator<FramePtr> i(m_RenderFrames);
-	while (i.hasNext()) 
+	while (i.hasNext())
 	{
 		FramePtr renderFrame = i.next();
 		if (!renderFrame)

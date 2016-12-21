@@ -58,7 +58,7 @@ protected:
 protected:
 	Host* m_Host;
 	bool m_ReadyToRender;
-	
+
 	int m_BufferWidth;
 	int m_BufferHeight;
 	bool m_BufferSizeChanged;

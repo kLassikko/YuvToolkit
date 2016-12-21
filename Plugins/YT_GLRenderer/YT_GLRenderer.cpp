@@ -19,7 +19,7 @@ RESULT OpenGLRendererPlugin::Init( Host* host)
 {
 	g_Host = host;
 
-	if (QGLFormat::hasOpenGL() && QGLPixelBuffer::hasOpenGLPbuffers()) 
+	if (QGLFormat::hasOpenGL() && QGLPixelBuffer::hasOpenGLPbuffers())
 	{
 		g_Host->RegisterPlugin(this, PLUGIN_RENDERER, QString("OpenGL"));
 	}
@@ -42,10 +42,10 @@ void OpenGLRendererPlugin::ReleaseRenderer( Renderer* parent )
 
 
 
-OpenGLRenderer::OpenGLRenderer(Host* host, QWidget* widget, const QString& name) 
+OpenGLRenderer::OpenGLRenderer(Host* host, QWidget* widget, const QString& name)
 : QGLWidget(widget), m_Host(host), m_ReadyToRender(false)
 {
-	setAutoBufferSwap(false); // swap buffer in rendering thread	
+	setAutoBufferSwap(false); // swap buffer in rendering thread
 
 	m_BufferSizeChanged = true;
 	m_BufferWidth = 640;
@@ -63,7 +63,7 @@ OpenGLRenderer::~OpenGLRenderer()
 
 RESULT OpenGLRenderer::RenderScene(const FrameList& frames)
 {
-	if (m_ReadyToRender) 
+	if (m_ReadyToRender)
 	{
 		makeCurrent();
 
@@ -84,7 +84,7 @@ RESULT OpenGLRenderer::RenderScene(const FrameList& frames)
 #else
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);     // Background => dark blue
 #endif
-		for (int i=0; i<frames.size(); ++i) 
+		for (int i=0; i<frames.size(); ++i)
 		{
 			FramePtr frame = frames.at(i);
 			if (!frame)
@@ -97,8 +97,8 @@ RESULT OpenGLRenderer::RenderScene(const FrameList& frames)
 
 			QImage image = *(QImage*)(frame->ExternData());
 			glRasterPos2f(dstRect.left(), dstRect.top());
-			glPixelZoom(((float)(dstRect.width()))/(srcRect.width()), 
-				-1.0 * ((float)(dstRect.height()))/(srcRect.height()));	
+			glPixelZoom(((float)(dstRect.width()))/(srcRect.width()),
+				-1.0 * ((float)(dstRect.height()))/(srcRect.height()));
 			glPixelStorei(GL_UNPACK_ROW_LENGTH, image.width());
 			const uchar* bits  = image.bits() + (srcRect.top())*image.width()*3 + srcRect.left()*3;
 			glDrawPixels(srcRect.width(), srcRect.height(), GL_RGB, GL_UNSIGNED_BYTE, bits);
@@ -172,12 +172,12 @@ void OpenGLRenderer::showEvent( QShowEvent*)
 }
 
 void OpenGLRenderer::OnResizeTimer()
-{	
+{
 }
 
 void OpenGLRenderer::resizeEvent( QResizeEvent* )
 {
-	// Do nothing, but prevent parent class to call makeCurrent()		
+	// Do nothing, but prevent parent class to call makeCurrent()
 
 	if (width()!=m_BufferWidth || height()!=m_BufferHeight)
 	{

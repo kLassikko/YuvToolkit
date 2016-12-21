@@ -88,16 +88,17 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 	{
 		MeasureOperation* op = operations[i];
 
-		op->hasResults[PLANE_Y] = 
-			op->hasResults[PLANE_U] = 
-			op->hasResults[PLANE_V] = 
-			op->hasResults[PLANE_COLOR] = 
+		op->hasResults[PLANE_Y] =
+			op->hasResults[PLANE_U] =
+			op->hasResults[PLANE_V] =
+			op->hasResults[PLANE_COLOR] =
 			false;
 
 		if (op->measureName == "MSE")
 		{
 			idxMse = i;
-		}else if (op->measureName == "PSNR")
+		}
+		else if (op->measureName == "PSNR")
 		{
 			idxPsnr = i;
 		}
@@ -111,20 +112,22 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 	double* mseResults;
 	if (opMse)
 	{
-		opMse->results[PLANE_Y] = opMse->results[PLANE_U] = 
+		opMse->results[PLANE_Y] = opMse->results[PLANE_U] =
 			opMse->results[PLANE_V] = opMse->results[PLANE_COLOR] = 0;
 		mseResults = opMse->results;
-	}else if (opPsnr)
+	}
+	else if (opPsnr)
 	{
 		mseResults = opPsnr->results;
-	}else
+	}
+	else
 	{
 		return;
 	}
-	
+
 	if (opPsnr)
 	{
-		opPsnr->results[PLANE_Y] = opPsnr->results[PLANE_U] = 
+		opPsnr->results[PLANE_Y] = opPsnr->results[PLANE_U] =
 			opPsnr->results[PLANE_V] = opPsnr->results[PLANE_COLOR] = 0;
 	}
 
@@ -137,7 +140,7 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 			int height1 = source1->Format()->PlaneHeight(i);
 			int width2 = source2->Format()->PlaneWidth(i);
 			int height2 = source2->Format()->PlaneHeight(i);
-			
+
 			if (width1 == width2 && height1 == height2 && width1>0 && height1>0)
 			{
 				int weightPlane = source1->Format()->Width()*source1->Format()->Height()*4/width1/height1;
@@ -149,11 +152,12 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 					if (opMse && opMse->distMap)
 					{
 						mseMap = opMse->distMap;
-					}else if (opPsnr && opPsnr->distMap)
+					}
+					else if (opPsnr && opPsnr->distMap)
 					{
 						mseMap = opPsnr->distMap;
 					}
-					
+
 					if (mseMap)
 					{
 						distMapWidth = width1;
@@ -161,7 +165,8 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 					}
 
 					mse = ComputeMSE(source1, source2, i, mseMap);
-				}else
+				}
+				else
 				{
 					mse = ComputeMSE(source1, source2, i, DistMapPtr());
 				}
@@ -173,7 +178,8 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 					opMse->hasResults[i] = true;
 				}
 			}
-		}else
+		}
+		else
 		{
 			mseResults[i] /= weightSum;
 			if (opMse)
@@ -210,7 +216,8 @@ void MeasuresBasic::Process(FramePtr source1, FramePtr source2, YUV_PLANE plane,
 				{
 					psnrData[i] = c - 10.0*log10(mseData[i]);
 				}
-			}else
+			}
+			else
 			{
 				// generate PSNR map in-place
 				float c = 20.0*log10(255.0);

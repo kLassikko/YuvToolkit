@@ -5,16 +5,16 @@
 #include <math.h>
 #include <assert.h>
 
-QString resolution_names[RESOLUTION_COUNT] = 
+QString resolution_names[RESOLUTION_COUNT] =
 {
 	"QQVGA   (160 x 120)",
 	"QCIF    (176 x 144)",
 	"QVGA    (320 x 240)",
 	"CIF     (352 x 288)",
-	"VGA     (640 x 480)",	
+	"VGA     (640 x 480)",
 	"480P    (720 x 480)",
 	"4CIF    (704 x 576)",
-	"576P    (720 x 576)", 
+	"576P    (720 x 576)",
 	"720P   (1280 x 720)",
 	"1080P  (1920 x 1080)",
 	"2160P  (3840 x 2160)",
@@ -80,7 +80,7 @@ RESULT YTS_Raw::Init(SourceCallback* callback, const QString& path)
 {
 	m_Callback = callback;
 	m_Format = GetHost()->NewFormat();
-	
+
 	m_Path = path;
 	QString ext = path.right(4);
 
@@ -93,11 +93,11 @@ RESULT YTS_Raw::Init(SourceCallback* callback, const QString& path)
 
 	// Parse resolution
 	QRegExp rx;
-	rx.setCaseSensitivity(Qt::CaseInsensitive);	
+	rx.setCaseSensitivity(Qt::CaseInsensitive);
 	rx.setPattern("(\\d\\d+)(X)(\\d\\d+)");
-	
+
 	pos = 0;
-	while ((pos = rx.indexIn(path, pos)) !=-1) 
+	while ((pos = rx.indexIn(path, pos)) !=-1)
 	{
 		pos += rx.matchedLength();
 
@@ -121,12 +121,12 @@ RESULT YTS_Raw::Init(SourceCallback* callback, const QString& path)
 				resolutionList.append(rx.cap(1).toUpper());
 				widthList.append(rx.cap(2).toInt());
 				heightList.append(rx.cap(3).toInt());
-			}			
+			}
 		}
 
 		rx.setPattern("(" + resolutionList.join("|") + ")");
 		pos = 0;
-		while ((pos = rx.indexIn(path, pos)) !=-1) 
+		while ((pos = rx.indexIn(path, pos)) !=-1)
 		{
 			pos += rx.matchedLength();
 
@@ -144,7 +144,7 @@ RESULT YTS_Raw::Init(SourceCallback* callback, const QString& path)
 	// match 30Hz 30FPS
 	rx.setPattern("([0-9]+)(\\.[0-9]+){0,1}(HZ|FPS)");
 	pos = 0;
-	while ((pos = rx.indexIn(path, pos)) !=-1) 
+	while ((pos = rx.indexIn(path, pos)) !=-1)
 	{
 		pos += rx.matchedLength();
 
@@ -153,7 +153,7 @@ RESULT YTS_Raw::Init(SourceCallback* callback, const QString& path)
 	}
 
 	rx.setPattern("I420|IYUV|UYVY|YUY2|YVYU|YUYV|YV12|NV12|IMC2|IMC4|Y800|RGB24|BGR24|RGBX32|XRGB32|BGRX32|XBGR32|RGBA32|ARGB32|BGRA32|ABGR32|RGB565|BGR565|GRAY8");
-	
+
 	pos = 0;
 	while ((pos = rx.indexIn(path, pos)) !=-1)
 	{
@@ -193,9 +193,9 @@ RESULT YTS_Raw::Init(SourceCallback* callback, const QString& path)
 			m_Format->SetColor(Y800);
 		}else
 		{
-			COLOR_FORMAT cc = (COLOR_FORMAT) FOURCC(fourcc.at(0).toAscii(), 
-				fourcc.at(1).toAscii(), 
-				fourcc.at(2).toAscii(), 
+			COLOR_FORMAT cc = (COLOR_FORMAT) FOURCC(fourcc.at(0).toAscii(),
+				fourcc.at(1).toAscii(),
+				fourcc.at(2).toAscii(),
 				fourcc.at(3).toAscii());
 			if (cc == IYUV)
 			{
@@ -228,7 +228,7 @@ void YTS_Raw::InitInternal()
 	{
 		m_NumFrames = file_info.size()/frame_size;
 		m_NumFrames = MyMax(m_NumFrames, 1);
-		
+
 		m_Duration = IndexToPTS(m_NumFrames);
 	}
 
@@ -294,8 +294,8 @@ RESULT YTS_Raw::GetFrame( FramePtr frame, unsigned int seekingPTS )
 	if (m_FrameIndex>0 || !m_InsertFrame0)
 	{
 		qint64 frameIdx = m_FrameIndex - m_InsertFrame0;
-		qint64 readPos =  frame_size*frameIdx; 
-		
+		qint64 readPos =  frame_size*frameIdx;
+
 		if (m_File->pos() != readPos)
 		{
 			file_status = m_File->seek(readPos);
@@ -323,7 +323,7 @@ RESULT YTS_Raw::GetFrame( FramePtr frame, unsigned int seekingPTS )
 		}
 	}
 
-	
+
 	if (file_status)
 	{
 		unsigned int pts = IndexToPTS(m_FrameIndex);
@@ -337,7 +337,7 @@ RESULT YTS_Raw::GetFrame( FramePtr frame, unsigned int seekingPTS )
 		}else
 		{
 			frame->SetInfo(NEXT_PTS, IndexToPTS(m_FrameIndex+1));
-		}		
+		}
 
 		m_FrameIndex++;
 
@@ -410,7 +410,7 @@ QWidget* YTS_Raw::CreateGUI( QWidget* parent )
 void YTS_Raw::ReInit( const FormatPtr format, double FPS )
 {
 	QMutexLocker locker(&m_Mutex);
-	
+
 	// unsigned int pts = IndexToPTS(m_FrameIndex);
 
 	*m_Format = *format;
@@ -442,13 +442,13 @@ RESULT YTS_Raw::GetTimeStamps( QList<unsigned int>& timeStamps )
 		timeStamps.append(m_TimeStamps);
 		timeStamps.removeLast();
 	}else
-	{		
+	{
 		timeStamps.reserve(m_NumFrames);
 		for (int i=0; i<m_NumFrames; i++) {
 			timeStamps.append(IndexToPTS(i));
 		}
 	}
-	
+
 	return OK;
 }
 
@@ -468,7 +468,7 @@ RESULT YTS_Raw::SetTimeStamps( QList<unsigned int> timeStamps )
 		}
 
 		// make sure it is non-decreasing
-		for (int i = 1; i < m_TimeStamps.size(); ++i) 
+		for (int i = 1; i < m_TimeStamps.size(); ++i)
 		{
 			if (m_TimeStamps.at(i) < m_TimeStamps.at(i-1))
 			{
