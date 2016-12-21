@@ -226,14 +226,16 @@ struct SourceInfo
 	unsigned int duration; // in ms
 	unsigned int lastPTS; // PTS of last frame
 
-	SourceInfo() {
+	SourceInfo()
+	{
 		maxFps = 0;
 		num_frames = 0;
 		duration = 0;
 		lastPTS = 0;
 	}
 
-	void Reset() {
+	void Reset()
+	{
 		format.clear();
 		maxFps = 0;
 		num_frames = 0;

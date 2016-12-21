@@ -444,7 +444,8 @@ RESULT YTS_Raw::GetTimeStamps( QList<unsigned int>& timeStamps )
 	}else
 	{
 		timeStamps.reserve(m_NumFrames);
-		for (int i=0; i<m_NumFrames; i++) {
+		for (int i=0; i<m_NumFrames; i++)
+		{
 			timeStamps.append(IndexToPTS(i));
 		}
 	}

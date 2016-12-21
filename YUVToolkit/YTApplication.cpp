@@ -62,7 +62,8 @@ YTApplication::~YTApplication()
 
 bool YTApplication::event(QEvent *event)
 {
-	switch (event->type()) {
+	switch (event->type())
+	{
 	case QEvent::FileOpen:
 	{
 		QStringList list(static_cast<QFileOpenEvent *>(

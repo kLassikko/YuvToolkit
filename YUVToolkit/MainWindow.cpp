@@ -606,7 +606,8 @@ QScriptValue TextFileConstructor(QScriptContext*context,QScriptEngine*engine)
 {
 	QString filename = context->argument(0).toString();
 	bool write = false;
-	if (context->argumentCount()>1) {
+	if (context->argumentCount()>1)
+	{
 		write = context->argument(1).toBool();
 	}
 	TextFile* file = new TextFile(filename, write);

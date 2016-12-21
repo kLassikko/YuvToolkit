@@ -67,7 +67,8 @@ RESULT OpenGLRenderer::RenderScene(const FrameList& frames)
 	{
 		makeCurrent();
 
-		if (m_BufferSizeChanged) {
+		if (m_BufferSizeChanged)
+		{
 			glViewport(0, 0, m_BufferWidth, m_BufferHeight);
 			// Set up 2D view, and map topleft to 0,0
 			glMatrixMode(GL_PROJECTION);
@@ -165,7 +166,8 @@ void OpenGLRenderer::paintEvent( QPaintEvent* )
 
 void OpenGLRenderer::showEvent( QShowEvent*)
 {
-	if (!m_ReadyToRender) {
+	if (!m_ReadyToRender)
+	{
 		doneCurrent();
 		m_ReadyToRender = true;
 	}

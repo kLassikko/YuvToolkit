@@ -50,7 +50,8 @@ QVariant MeasureResultsModel::data( const QModelIndex &index, int role /*= Qt::D
 	int row = index.row();
 	int col = index.column();
 
-	switch(role){
+	switch(role)
+	{
 	case Qt::DisplayRole:
 		{
 			unsigned int sourceViewId1 = m_SourceView1Ids.at(col);
@@ -96,10 +97,12 @@ QVariant MeasureResultsModel::data( const QModelIndex &index, int role /*= Qt::D
 
 QVariant MeasureResultsModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
-	switch(role){
+	switch(role)
+	{
 	case Qt::DisplayRole:
 		{
-			if (orientation == Qt::Horizontal) {
+			if (orientation == Qt::Horizontal)
+			{
 				switch (section)
 				{
 				case 0:
@@ -110,7 +113,8 @@ QVariant MeasureResultsModel::headerData( int section, Qt::Orientation orientati
 					return QString("3");
 				}
 			}
-			else {
+			else
+			{
 				QString header = m_MeasureNameRows.at(section/4);
 				int plane = section%4;
 				switch (plane)

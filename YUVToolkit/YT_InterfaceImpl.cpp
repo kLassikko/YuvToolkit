@@ -572,7 +572,8 @@ void HostImpl::Init()
 #else
 #	error Unsupported platform
 #endif
-	foreach (QString fileName, pluginsDir.entryList(files, QDir::Files)) {
+	foreach (QString fileName, pluginsDir.entryList(files, QDir::Files))
+	{
 		QPluginLoader loader(pluginsDir.absoluteFilePath(fileName));
 
 		QObject *plugin = loader.instance();
@@ -979,7 +980,8 @@ void PlaybackControl::ShowPlane( YUV_PLANE p )
 	WARNING_LOG("Show plane %d", p);
 }
 
-void PlaybackControl::GetStatus( Status* status ){
+void PlaybackControl::GetStatus( Status* status )
+{
 	QMutexLocker locker(&m_Mutex);
 
 	*status = m_Status;

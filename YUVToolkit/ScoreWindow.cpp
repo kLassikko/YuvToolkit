@@ -275,7 +275,8 @@ QString ScoreWindow::getCurButtonResults(const QStringList& fileList)
 void ScoreWindow::openResultsFile(QString fname, int mode)
 {
 	FileHandle = new QFile(fname);
-	switch(mode) {
+	switch(mode)
+	{
 	case 0: FileHandle->open(QIODevice::WriteOnly | QIODevice::Text); break;
 	case 1: FileHandle->open(QIODevice::ReadOnly | QIODevice::Text); break;
 	case 2: FileHandle->open(QIODevice::Append | QIODevice::Text); break;
