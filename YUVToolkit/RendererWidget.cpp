@@ -43,10 +43,10 @@ void RendererWidget::paintEvent( QPaintEvent* )
 			painter.drawRect(pos.x()-1, pos.y()-1, size.width()+1, size.height()+1);
 		}*/
 	}
-	
+
 }
 
-RendererWidget::RendererWidget( QWidget* parent ) : 
+RendererWidget::RendererWidget( QWidget* parent ) :
 	QWidget(parent), m_Renderer(NULL), m_Plugin(NULL)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent, true); // don't clear the area before the paintEvent
@@ -68,7 +68,7 @@ void RendererWidget::Init(const QString& renderType)
 {
 	assert(m_Renderer==0);
 
-	m_Plugin = GetHostImpl()->FindRenderPlugin(renderType);	
+	m_Plugin = GetHostImpl()->FindRenderPlugin(renderType);
 	m_Renderer = m_Plugin->NewRenderer(this, renderType);
 
 	QWidget* widget = m_Renderer->GetWidget();

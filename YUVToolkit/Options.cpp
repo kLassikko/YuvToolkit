@@ -15,7 +15,7 @@ Options::Options( QWidget *parent, Qt::WFlags flags ) : QDialog(parent, flags)
 #if defined(Q_WS_WIN)
 	IApplicationAssociationRegistrationUI* pAARUI = NULL;
 	HRESULT hr = ::CoCreateInstance( CLSID_ApplicationAssociationRegistrationUI, NULL, CLSCTX_INPROC, __uuidof( IApplicationAssociationRegistrationUI ), reinterpret_cast< void** >( &pAARUI ) );
-	if ( SUCCEEDED( hr ) && pAARUI != NULL ) 
+	if ( SUCCEEDED( hr ) && pAARUI != NULL )
 	{
 		pAARUI->Release();
 	}
@@ -32,11 +32,11 @@ Options::Options( QWidget *parent, Qt::WFlags flags ) : QDialog(parent, flags)
 		ui.button_File_Associations->setVisible(false);
 		ui.label_File_Associations->setVisible(false);
 	}
-	
+
 	connect(this, SIGNAL(accepted()), this, SLOT(OnAccepted()));
-	connect(ui.measureList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), 
+	connect(ui.measureList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
 		this, SLOT(OnMeasureSelected(QListWidgetItem*, QListWidgetItem*)));
-	connect(ui.measureList, SIGNAL(itemChanged(QListWidgetItem*)), 
+	connect(ui.measureList, SIGNAL(itemChanged(QListWidgetItem*)),
 		this, SLOT(OnMeasureChanged(QListWidgetItem*)));
 
 	QSettings settings;
@@ -46,7 +46,7 @@ Options::Options( QWidget *parent, Qt::WFlags flags ) : QDialog(parent, flags)
 	QStringList enabledMeasures = settings.SETTINGS_GET_MEASURES();
 	QStringList distMaps = settings.SETTINGS_GET_DIST_MAP();
 	const QStringList& measures = GetHostImpl()->GetMeasures();
-	
+
 	for (int i=0; i< measures.size(); i++)
 	{
 		const QString& m = measures.at(i);
@@ -125,7 +125,7 @@ void Options::on_button_File_Associations_clicked()
 	IApplicationAssociationRegistrationUI* pAARUI = NULL;
 	HRESULT hr = ::CoCreateInstance( CLSID_ApplicationAssociationRegistrationUI, NULL, CLSCTX_INPROC, __uuidof( IApplicationAssociationRegistrationUI ), reinterpret_cast< void** >( &pAARUI ) );
 
-	if ( SUCCEEDED( hr ) && pAARUI != NULL ) 
+	if ( SUCCEEDED( hr ) && pAARUI != NULL )
 	{
 		hr = pAARUI->LaunchAdvancedAssociationUI(L"YuvToolkit");
 		pAARUI->Release();

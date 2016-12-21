@@ -41,7 +41,7 @@ void ScoreWindow::changeButtonName(QString a, QString b, QString c)
 }
 
 void ScoreWindow::createButton(int num,QString name)
-{	
+{
 	ButtonNameList = name.split(',');
 	QGridLayout *box = new QGridLayout;
 	ButtonList = (QRadioButton **) malloc (num * sizeof(QRadioButton));
@@ -173,7 +173,7 @@ void ScoreWindow::updateCurSlider()
 		if (cur_label.contains("Not_rated"))
 		{
 			enable = false;
-		}		
+		}
 	};
 	if (enable)
 		ui.buttonNext->setEnabled(true);
@@ -213,8 +213,8 @@ QString ScoreWindow::getCurSliderResults(const QStringList& fileList)
 	{
 		QString SingleResult;
 		const QString& fName = fileList[i];
-		QString cur_label = label_cur_selected_list[i]->text();	
-		SingleResult = "\"" + fName + "\":" + cur_label; 
+		QString cur_label = label_cur_selected_list[i]->text();
+		SingleResult = "\"" + fName + "\":" + cur_label;
 		if (i != NumOfConditions -1)
 		{
 			SingleResult.append(",");
@@ -228,8 +228,8 @@ QString ScoreWindow::getCurSliderResults(const QStringList& fileList)
 void ScoreWindow::getCurSliderResultsPlusTimestamp(QString timestamp)
 {
 	QString SingleResult;
-	QString cur_label = label_cur_selected_list[0]->text();	
-	SingleResult = "(" +  cur_label + ":" + timestamp + "),"; 
+	QString cur_label = label_cur_selected_list[0]->text();
+	SingleResult = "(" +  cur_label + ":" + timestamp + "),";
 	sscqeresult.append(SingleResult);
 }
 
@@ -255,12 +255,12 @@ QString ScoreWindow::getCurButtonResults(const QStringList& fileList)
 		QString SingleResult;
 		const QString& fName = fileList[i];
 		if (ButtonList[i]->isChecked() == true)
-		{		
-			SingleResult = "\"" + fName + "\":1"; 
+		{
+			SingleResult = "\"" + fName + "\":1";
 		}
 		else
 		{
-			SingleResult = "\"" + fName + "\":0"; 
+			SingleResult = "\"" + fName + "\":0";
 		}
 		if (i != NumOfConditions -1)
 		{
@@ -308,7 +308,7 @@ QVariant ScoreWindow::shuffleList(QVariant origin, bool shuffle_scene, bool shuf
 		QStringList temp = videoList[i].toStringList();
 		c_videoList.append(temp);
 	}
-	
+
 	if (shuffle_scene == true)
 	{
 		std::random_shuffle(c_videoList.begin(),c_videoList.end());
@@ -336,14 +336,14 @@ QVariant ScoreWindow::shuffleList(QVariant origin, bool shuffle_scene, bool shuf
 	}
 
 	QList<QVariant> output;
-	
+
 	for(int i=0; i<size; i++)
 	{
 		QVariant temp(c_videoList[i]);
 		output.append(temp);
 	}
 
-	return QVariant(output);	
+	return QVariant(output);
 }
 
 

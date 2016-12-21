@@ -30,7 +30,7 @@ protected:
 		QPainter painter(this);
 		QFontMetrics fontMetrics = painter.fontMetrics();
 		QString elidedLastLine = fontMetrics.elidedText(content, Qt::ElideRight, rc.width());
-		
+
 		painter.drawText(rc, Qt::AlignLeft|Qt::AlignVCenter, elidedLastLine);
 	}
 private:

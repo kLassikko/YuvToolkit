@@ -5,7 +5,7 @@
 class QWidget;
 
 #define INVALID_PTS		0xffffffff
-#define FOURCC(a,b,c,d) (((unsigned int)a)|(((unsigned int)b)<<8)|(((unsigned int)c)<<16)|(((unsigned int)d)<<24)) 
+#define FOURCC(a,b,c,d) (((unsigned int)a)|(((unsigned int)b)<<8)|(((unsigned int)c)<<16)|(((unsigned int)d)<<24))
 
 enum RESULT {
 	OK 					= 0x00000000,
@@ -17,7 +17,7 @@ enum RESULT {
 };
 
 enum COLOR_FORMAT {
-	NODATA = 0xffffffff,	
+	NODATA = 0xffffffff,
 	// Natively supported
 	Y800   = 0x30303859,   // 8 bit single plane
 	I420   = 0x30323449,   // Planar 420
@@ -25,7 +25,7 @@ enum COLOR_FORMAT {
 	I444   = 0x34343449,   // Planar 444
 	IYUV   = 0x56555949,   // Same as I420
 	YV12   = 0x32315659,   // Planar 420, U,V flipped
-	YV16   = 0x36315659,   // Planar 422, U,V flipped	
+	YV16   = 0x36315659,   // Planar 422, U,V flipped
 	YV24   = 0x34325659,   // Planar 444, U,V flipped
 	IMC2   = 0x32434D49,
 	IMC4   = 0x34434D49,
@@ -40,7 +40,7 @@ enum COLOR_FORMAT {
 	RGBX32 = 32,
 	XRGB32 = 321,
 	BGRX32 = 322,
-	XBGR32 = 323,	
+	XBGR32 = 323,
 	RGB565 = 16,
 	BGR565 = 161,
 };
@@ -131,7 +131,7 @@ public:
 	virtual void SetInfo(INFO_KEY, QVariant) = 0;
 
 	// Given the format, allocate the memory and populate Data
-	virtual RESULT Allocate() = 0; 
+	virtual RESULT Allocate() = 0;
 	// Reset the internal buffer, call me before changing the format
 	virtual RESULT Reset() = 0;
 };
@@ -282,7 +282,7 @@ public:
 
 	// Receive a list of source time stamps
 	virtual RESULT GetTimeStamps(QList<unsigned int>& timeStamps) = 0;
-	
+
 	// Set custom time stamps
 	virtual RESULT SetTimeStamps(QList<unsigned int> timeStamps) = 0;
 
@@ -297,7 +297,7 @@ public:
 #define SET_RECT(rect, left, top, width, height) {rect[0]=left; rect[1]=top; rect[2]=left+width; rect[3]=top+height;}
 #define COPY_RECT(rc, qrc) {rc[0]=qrc.left(); rc[1]=qrc.top(); rc[2]=qrc.left()+qrc.width(); rc[3]=qrc.top()+qrc.height();}
 
-// Render host is the parent of all renderers in one 
+// Render host is the parent of all renderers in one
 // window. Can have multiple renderers inside
 class Renderer
 {
@@ -310,7 +310,7 @@ public:
 	// frames should be frames allocated by renderer
 	// it should have SRC_RECT/DST_RECT properties
 	virtual RESULT RenderScene(const FrameList& frames) = 0;
-	   
+
 	// Allocate render specific buffers
 	virtual RESULT Allocate(FramePtr& frame, FormatPtr sourceFormat) = 0;
 	virtual RESULT Deallocate(FramePtr frame) = 0;
@@ -335,13 +335,13 @@ struct TransformCapability
 
 	unsigned int inputColorsCount;
 	COLOR_FORMAT inputColors[8];
-	
+
 	bool supportColor; // Can operate on all planes jointly
 	bool supportPlanes; // Can operate on each plane separately
 	bool need2Inputs;
 };
 
-class Transform 
+class Transform
 {
 public:
 	virtual ~Transform() {}
@@ -350,7 +350,7 @@ public:
 
 	virtual void Process(FramePtr source1, FramePtr source2, unsigned int transformId, int plane, FramePtr result) = 0;
 
-	 // Returns what format that is supported	
+	 // Returns what format that is supported
 	virtual RESULT GetSupportedModes(FormatPtr sourceFormat, QList<QString>& outputNames, QList<QString>& statNames) {return OK;}
 
 	virtual RESULT GetFormat(FormatPtr sourceFormat, const QString& outputName, FormatPtr outputFormat) {return OK;}
@@ -370,7 +370,7 @@ struct MeasureInfo
 	// Duplicated info as already defined in MeasureCapabilities, but put here for convenience
 	// A measure plugin can support multiple measures, but if multiple measures are within
 	// same plugin, they MUST all have or not have distortion map.
-	bool hasDistortionMap; 
+	bool hasDistortionMap;
 };
 
 struct MeasureCapabilities
@@ -387,10 +387,10 @@ typedef QSharedPointer<DistMap> DistMapPtr;
 struct MeasureOperation
 {
 	QString measureName;
-	
+
 	bool hasResults[PLANE_COUNT];
 	double results[PLANE_COUNT];
-	
+
 	DistMapPtr distMap;
 	int distMapWidth;
 	int distMapHeight;

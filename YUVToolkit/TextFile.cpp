@@ -15,7 +15,7 @@ TextFile::TextFile( QString fileName, bool write ) : QFile(fileName)
 	{
 		open(QIODevice::ReadOnly | QIODevice::Text);
 	}
-	
+
 
 	stream.setDevice(this);
 }

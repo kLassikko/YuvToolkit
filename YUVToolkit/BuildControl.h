@@ -1,1 +1,1 @@
-#define SUBJECTIVETEST 0 
+#define SUBJECTIVETEST 0

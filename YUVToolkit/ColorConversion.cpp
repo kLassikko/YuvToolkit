@@ -93,7 +93,7 @@ void ColorConversion(const Frame& in, Frame& out)
 	PrepareCC(color_in, data_in);
 	PrepareCC(color_out, data_out);
 
-	
+
 
 	bool ok = false;
 	if (!ok)
@@ -112,7 +112,7 @@ void ColorConversion(const Frame& in, Frame& out)
 			sws_freeContext( ctx );
 		}
 	}
-	
+
 	if (!ok)
 	{
 		// Fill with random data

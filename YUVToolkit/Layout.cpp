@@ -11,7 +11,7 @@
 Layout::Layout(QWidget* p) : parent(p), m_ActiveVidew(0),
 m_ViewWidth(0), m_ViewHeight(0)
 {
-	
+
 }
 
 Layout::~Layout(void)
@@ -29,7 +29,7 @@ void Layout::RemoveView( VideoView* vv)
 {
 	m_ActiveVidew = NULL;
 	m_VideoList.removeOne(vv);
-	
+
 	UpdateGrid();
 	UpdateGeometry();
 }
@@ -58,7 +58,7 @@ void Layout::UpdateGrid()
 			vv->computeAR( vv->width(), vv->height(), w, h);
 			area += w*h;
 		}
-		
+
 		float coverage = ((float)area)/(viewWidth*viewHeight);
 		if (coverage>=maxCoverage)
 		{
@@ -104,7 +104,7 @@ void Layout::GetDisplaySize( QSize& displaySize )
 	UpdateGrid();
 	QSize max, cur, actual;
 
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		vv->GetVideoSize(actual, cur);
@@ -173,7 +173,7 @@ VideoView* Layout::FindVideoAtMoisePosition()
 	QPoint pos = parent->mapFromGlobal(QCursor::pos());
 
 	if (pos.x()<=0 || pos.x()>=parent->width() ||
-		pos.y()<=0 || pos.y()>=parent->height() || 
+		pos.y()<=0 || pos.y()>=parent->height() ||
 		m_ViewHeight==0 || m_ViewWidth==0)
 	{
 		return NULL;

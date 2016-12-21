@@ -45,7 +45,7 @@ signals:
 	void activeVideoViewChanged(VideoView*);
 	void lastFrameDisplayed();
 	void Timestamp(QString);
-	
+
 public slots:
 	QList<VideoView*> openFiles(const QStringList& fileList);
 	void importExtension(QString strPath);
@@ -75,25 +75,25 @@ protected:
 private:
 	void UpdateStatusMessage(const QString& msg);
 	void UpdateActiveVideoView();
-	
+
 	void autoResizeWindow();
 	void SetZoomMode(int mode);
 public slots:
-	void OnUpdateSlider(unsigned int duration, unsigned int pts);	
+	void OnUpdateSlider(unsigned int duration, unsigned int pts);
 	void OnAutoResizeWindow();
 	void OnActiveVideoViewChanged(VideoView*);
 	void OnVideoViewClosed(VideoView* );
 	void OnVideoViewCreated(VideoView* );
 	void OnVideoViewListChanged();
 	void OnVideoViewSourceListChanged();
-	
+
 private slots:
 	void OnTimer();
 	void OnRendererSelected();
 	void openScript(QString strPath, bool debug);
 	void on_action_Play_Pause_triggered(bool play);
 	void OnLastFrameDisplayed();
-	
+
 	void on_action_New_Window_triggered();
 	void on_action_Open_triggered();
 	void on_action_Run_Script_triggered();
@@ -102,7 +102,7 @@ private slots:
 	void on_action_Homepage_triggered();
 	void on_action_About_triggered();
 	void on_action_Exit_triggered();
-	
+
 	void on_action_Zoom_50_triggered();
 	void on_action_Zoom_100_triggered();
 	void on_action_Zoom_200_triggered();
@@ -125,7 +125,7 @@ private slots:
 	void on_action_Select_From_triggered();
 	void on_action_Select_To_triggered();
 	void on_action_Clear_Selection_triggered();
-	
+
 	void on_action_Options_triggered();
 	void on_action_Enable_Measures_triggered();
 
@@ -150,7 +150,7 @@ private:
 	ScoreWindow* m_ScoreWindow;
 	QDockWidget* m_ScoreDockWidget;
 	NameInput* m_NameInput;
-	
+
 	int m_ZoomMode;
 	unsigned int m_LastSliderValue;
 	bool m_IsPlaying;

@@ -21,7 +21,7 @@ QAbstractTableModel(parent), m_Results(results)
 				break;
 			}
 		}
-		
+
 		if (!found)
 		{
 			m_SourceView1Ids.append(item.sourceViewId1);
@@ -130,7 +130,7 @@ QVariant MeasureResultsModel::headerData( int section, Qt::Orientation orientati
 		}
 		break;
 	case Qt::FontRole:
-		if (orientation == Qt::Vertical) 
+		if (orientation == Qt::Vertical)
 		{
 			if (section%4 == 3)
 			{
@@ -174,7 +174,7 @@ void MeasureResultsModel::ResultsUpdated()
 	emit dataChanged(index(0,0), index(8, 1));
 }
 
-MeasureWindow::MeasureWindow(VideoViewList* vvList, QWidget *parent, Qt::WFlags flags) : 
+MeasureWindow::MeasureWindow(VideoViewList* vvList, QWidget *parent, Qt::WFlags flags) :
 	QMainWindow(parent, flags), m_VideoViewList(vvList), m_ToolBar(new QToolBar(this)),
 	m_ResultsTable(new QTableView(this)), m_ResultsModel(NULL), m_UpdateTimer(NULL),
 	m_ShowDisortionMap(false)
@@ -186,7 +186,7 @@ MeasureWindow::MeasureWindow(VideoViewList* vvList, QWidget *parent, Qt::WFlags 
 	m_ToolBar->setFloatable(false);
 	addToolBar(Qt::TopToolBarArea, m_ToolBar);
 
-	setWindowFlags(Qt::Widget); 
+	setWindowFlags(Qt::Widget);
 	setCentralWidget(m_ResultsTable);
 }
 
@@ -213,13 +213,13 @@ QSize MeasureWindow::sizeHint() const
 	QFontMetrics fontMetrics = painter.fontMetrics();
 	int columnWidth = fontMetrics.width("WWW.WW");*/
 	int columnWidth = 50;
-	
+
 	return QSize(columnWidth*3, 250);
 }
 
 void MeasureWindow::on_button_Options_clicked()
 {
-	
+
 }
 
 void MeasureWindow::OnTimer()
@@ -251,7 +251,7 @@ void MeasureWindow::UpdateRequest()
 			PlugInInfo* info = plugins.at(i);
 
 			MeasureItem req = {0};
-			
+
 			req.plugin = info;
 			req.measure = info->plugin->NewMeasure(info->string);
 
@@ -270,12 +270,12 @@ void MeasureWindow::UpdateRequest()
 				if (showDistMap)
 				{
 					QString str;
-					QTextStream(&str) << m << " map " << QString("%1").arg(j) << " between [" << 
+					QTextStream(&str) << m << " map " << QString("%1").arg(j) << " between [" <<
 						QString("%1").arg(sourceView1) << "] and [" << QString("%1").arg(sourceView2) << "]";
 					m_VideoViewList->NewVideoViewCompare(str, viewId, sourceView1, sourceView2);
 				}
 
-				
+
 				req.op.measureName = m;
 				req.sourceViewId1 = sourceView1;
 				req.sourceViewId2 = sourceView2;
@@ -314,7 +314,7 @@ void MeasureWindow::OnVideoViewSourceListChanged()
 	{
 		m_SourceList.removeLast();
 	}
-	
+
 	UpdateLabels();
 	if (isVisible())
 	{
@@ -333,7 +333,7 @@ void MeasureWindow::ClearAll()
 	// Clear request list from process threads
 	m_VideoViewList->GetProcessThread()->SetMeasureRequests(QList<MeasureItem>());
 	m_ResultsTable->setModel(NULL);
-	
+
 	QSet<Measure*> measureListDeleted;
 	for (int i=0; i<m_MeasureItemList.size(); i++)
 	{
@@ -358,7 +358,7 @@ void MeasureWindow::ClearAll()
 void MeasureWindow::UpdateLabels()
 {
 	/*TextLabel* labels[] = {ui.label_Original, ui.label_Processed, ui.label_Processed_2};
-	
+
 	for (int i=0; i<sizeof(labels)/sizeof(labels[0]); i++)
 	{
 		if (m_SourceList.size()>i)

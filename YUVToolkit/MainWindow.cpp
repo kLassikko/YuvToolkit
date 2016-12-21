@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) :
 	ui.statusBar->addPermanentWidget(m_TimeLabel2);
 	m_ZoomLabel = new QLabel(this);
 	ui.statusBar->addPermanentWidget(m_ZoomLabel);
-	
+
 	QSettings settings;
 	m_RenderType = settings.SETTINGS_GET_RENDERER();
 
@@ -121,7 +121,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) :
 		ui.action_Zoom_Fit->setChecked(true);
 		break;
 	}
-		
+
 	SetZoomMode(m_ZoomMode);
 
 	ui.mainToolBar->addSeparator();
@@ -200,7 +200,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) :
 	connect(m_VideoViewList, SIGNAL(VideoViewSourceListChanged()), m_MeasureWindow, SLOT(OnVideoViewSourceListChanged()));
 	connect(m_VideoViewList->GetProcessThread(), SIGNAL(lastFrameDisplayed()), this, SLOT(OnLastFrameDisplayed()));
 	connect(ui.action_Distortion_Map, SIGNAL(toggled(bool)), m_MeasureWindow, SLOT(OnShowDistortionMap(bool)));
-	
+
 	bool showDistMap = settings.SETTINGS_GET_SHOW_DIST_MAP();
 	ui.action_Distortion_Map->setChecked(showDistMap);
 
@@ -539,7 +539,7 @@ VideoView* MainWindow::openFile( QString strPath)
 	QStringList lst;
 	lst.append(strPath);
 	QList<VideoView*> vvLst = openFiles(lst);
-	if (vvLst.count()>0) 
+	if (vvLst.count()>0)
 	{
 		return vvLst[0];
 	}
@@ -593,13 +593,13 @@ Q_DECLARE_METATYPE(QList<unsigned int>);
 // Q_SCRIPT_DECLARE_QMETAOBJECT(TextFile, QString);
 
 QScriptValue VideoViewToScriptValue(QScriptEngine *engine, VideoView* const &in)
-{ 
-	return engine->newQObject(in); 
+{
+	return engine->newQObject(in);
 }
 
 void VideoViewFromScriptValue(const QScriptValue &object, VideoView* &out)
-{ 
-	out = qobject_cast<VideoView*>(object.toQObject()); 
+{
+	out = qobject_cast<VideoView*>(object.toQObject());
 }
 
 QScriptValue TextFileConstructor(QScriptContext*context,QScriptEngine*engine)
@@ -620,7 +620,7 @@ void MainWindow::openScript( QString strPath, bool debug )
 		delete m_Engine;
 		m_Engine = NULL;
 	}
-	
+
 	m_Engine = new QScriptEngine(this);
 	QMainWindow* debuggerWindow = NULL;
 
@@ -685,7 +685,7 @@ void MainWindow::openScript( QString strPath, bool debug )
 	QString oldPath = QDir::currentPath();
 	QFileInfo fileInfo(strPath);
 	QDir::setCurrent(fileInfo.path());
-	
+
 	QFile file(strPath);
 	if (file.size()>1000000)
 	{
@@ -703,7 +703,7 @@ void MainWindow::openScript( QString strPath, bool debug )
 		QMessageBox::warning(this, tr("Error evaluating script"), tr("Line %0: %1")
 			.arg(ret.property("lineNumber").toInt32())
 			.arg(ret.toString()));
-	} 
+	}
 }
 
 void MainWindow::autoResizeWindow()
@@ -913,7 +913,7 @@ void MainWindow::OnTimer()
 	const QList<unsigned int>& tsLst = m_VideoViewList->GetMergedTimeStamps();
 
 	m_VideoViewList->CheckRenderReset();
-	
+
 	UpdateActiveVideoView();
 	VideoView* active = m_ActiveVideoView;
 	OnUpdateSlider(tsLst.last(), status.lastProcessPTS);
@@ -984,7 +984,7 @@ void MainWindow::OnTimer()
 			m_RenderSpeedLabel->setText("Paused");
 		}
 	}
-	
+
 
 	if (status.isPlaying)
 	{
@@ -1007,8 +1007,8 @@ void MainWindow::OnTimer()
 		}
 	}
 
-	
-	
+
+
 }
 
 void MainWindow::stepVideo( int step )
@@ -1026,7 +1026,7 @@ void MainWindow::stepVideo( int step )
 			break;
 		}
 	}
-	
+
 	frame_num = MIN(MAX(frame_num + step, 0), tsLst.size()-1);
 	unsigned int pts = tsLst.at(frame_num);
 	m_VideoViewList->GetControl()->Seek(pts, false);
@@ -1051,7 +1051,7 @@ void MainWindow::EnableButtons( int nrSources )
 
 	m_ActionsButton->setEnabled(nrSources!=0);
 	ui.action_Compare->setEnabled(nrSources>1);
-	
+
 	// ui.action_Select_Processed_2->setEnabled(nrSources>2);
 	ui.action_Select_Original->setEnabled(false);
 	ui.action_Select_Processed_1->setEnabled(false);
@@ -1403,7 +1403,7 @@ void MainWindow::on_action_Enable_Measures_triggered()
 
 void MainWindow::closeAll()
 {
-	while (m_VideoViewList->size() > 0) 
+	while (m_VideoViewList->size() > 0)
 	{
 		closeFile(m_VideoViewList->last());
 	}
@@ -1434,7 +1434,7 @@ void MainWindow::importExtension( QString strPath )
 		QMessageBox::warning(this, tr("Error importing extension"), tr("Line %0: %1")
 			.arg(ret.property("lineNumber").toInt32())
 			.arg(ret.toString()));
-	} 
+	}
 
 }
 
@@ -1449,7 +1449,7 @@ QVariant MainWindow::getSetting( QString s)
 	{
 		return QVariant();
 	}
-	
+
 }
 
 void MainWindow::setSetting( QString s, QVariant v)

@@ -137,7 +137,7 @@ size_t FormatImpl::PlaneSize( int plane )
 			stride[0] = stride[1] = stride[2] = stride[3] = 0;
 			switch(color)
 			{
-			case I444:			
+			case I444:
 			case YV24:
 				stride[0] = width;
 				stride[1] = width;
@@ -193,7 +193,7 @@ size_t FormatImpl::PlaneSize( int plane )
 		case I422:
 			vstride[1] = height;
 			vstride[2] = height;
-			break;		
+			break;
 		case I420:
 		case IYUV:
 		case YV12:
@@ -637,7 +637,7 @@ RESULT HostImpl::RegisterPlugin( YTPlugIn* plugin, PLUGIN_TYPE type, const QStri
 
 				m_MeasureInfo.insert(info.name, info);
 			}
-			
+
 		}
 		break;
 	case PLUGIN_UNKNOWN:
@@ -1068,7 +1068,7 @@ const MeasureInfo& HostImpl::GetMeasureInfo( QString measureName )
 
 void HostImpl::UpdateMeasureInfo()
 {
-	
+
 }
 
 const QStringList& HostImpl::GetMeasures()

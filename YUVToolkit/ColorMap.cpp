@@ -86,7 +86,7 @@ void CreateColorMap( FramePtr frame, DistMapPtr distMap, int width, int height, 
 	{
 		qSwap<float>(upperRange, lowerRange);
 	}
-	
+
 	int offset=50; // cut of last range of colors to make overshoot/undershoot more distinct
 	float rangeScale = 1.0/(upperRange-lowerRange) * (255-offset*2);
 	float* mapData = distMap->data();
@@ -128,5 +128,5 @@ void CreateColorMap( FramePtr frame, DistMapPtr distMap, int width, int height, 
 			}
 		}
 	}
-	
+
 }

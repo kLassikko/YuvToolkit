@@ -35,7 +35,7 @@ public:
 	//bool GetRenderFrameList(QList<Render_Frame>& list, unsigned int& pts);
 	unsigned int GetDuration() {return m_Duration;}
 	void CheckRenderReset();
-	
+
 	void UpdateRenderLayout();
 
 	void DestroyRenderer();

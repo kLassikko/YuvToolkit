@@ -16,7 +16,7 @@ class MeasureResultsModel : public QAbstractTableModel
 	QStringList m_MeasureNameRows;
 	QList<unsigned int> m_SourceView1Ids;
 	QList<unsigned int> m_SourceView2Ids;
-	
+
 public:
 	MeasureResultsModel(QObject *parent, QList<MeasureItem>& );
 	int rowCount(const QModelIndex &parent = QModelIndex()) const ;
@@ -46,12 +46,12 @@ public:
 	~MeasureWindow();
 
 	QToolBar* GetToolBar() {return m_ToolBar;}
-	
+
 	QSize sizeHint() const;
 protected:
 	void showEvent(QShowEvent *event);
 	void hideEvent(QHideEvent *event);
-	
+
 	void ClearAll();
 	void UpdateRequest();
 	void UpdateLabels();

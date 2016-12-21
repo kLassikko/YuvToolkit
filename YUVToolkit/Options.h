@@ -17,7 +17,7 @@ signals:
 private slots:
 	void OnAccepted();
 	void on_button_File_Associations_clicked();
-	
+
 	void OnMeasureSelected(QListWidgetItem * current, QListWidgetItem * previous);
 	void OnMeasureChanged(QListWidgetItem * item);
 private:

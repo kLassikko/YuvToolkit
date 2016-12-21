@@ -38,8 +38,8 @@ VideoView* VideoViewList::NewVideoViewInternal( QString title, unsigned int view
 	INFO_LOG("VideoViewList::NewVideoView %X", vv);
 
 	m_RenderWidget->layout->AddView(vv);
-	m_VideoList.append(vv);	
-	
+	m_VideoList.append(vv);
+
 	vv->setTitle( title );
 
 	OnUpdateRenderWidgetPosition();
@@ -66,14 +66,14 @@ void VideoViewList::CloseVideoView( VideoView* vv)
 {
 	PLUGIN_TYPE plugin = vv->GetType();
 	INFO_LOG("VideoViewList::CloseVideoView %X", vv);
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		// VideoView* vv2 = m_VideoList.at(i);
 		/*
 		if (vv2->GetRefVideoQueue() == vv->GetVideoQueue())
 		{
 			CloseVideoView(vv2);
-			i = 0; 
+			i = 0;
 		}*/
 	}
 
@@ -81,7 +81,7 @@ void VideoViewList::CloseVideoView( VideoView* vv)
 
 	m_RenderWidget->layout->RemoveView(vv);
 	m_VideoList.removeOne(vv);
-	
+
 	GetProcessThread()->SetSources(GetSourceIDList());
 
 	VideoFormatReset();
@@ -178,14 +178,14 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 		// Get next pts to render
 		unsigned int minPTS = INVALID_PTS;
 		unsigned int maxPTS = 0;
-		for (int i=0; i<m_VideoList.size(); ++i) 
+		for (int i=0; i<m_VideoList.size(); ++i)
 		{
 			VideoView* vv = m_VideoList.at(i);
 			if (vv->GetType() == PLUGIN_SOURCE)
 			{
 				SourceThread* st = vv->GetSourceThread();
 				VideoQueue* vq = vv->GetVideoQueue();
-				
+
 				bool isLastFrame = false;
 				unsigned int currentPTS = vv->GetSource()->SeekPTS(m_CurrentPTS);
 				unsigned int nextPts = vq->GetNextPTS(currentPTS, isLastFrame);
@@ -215,7 +215,7 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 
 	bool shouldRender = true;
 	bool seekingDone = true;
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		if (!(vv->dstRect.isValid() && vv->srcRect.isValid()))
@@ -232,11 +232,11 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 			VideoQueue::Frame* vqf = NULL;
 			Source* source = vv->GetSource();
 			unsigned int sourcePTS = pts;
-			
+
 			if (source)
 			{
  				sourcePTS = source->SeekPTS(pts);
-			
+
 				vqf = vv->GetVideoQueue()->GetRenderFrame(sourcePTS);
 			}
 
@@ -265,7 +265,7 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 				{
 					SourceThread* st = vv->GetSourceThread();
 					st->Seek(sourcePTS);
-					// QMetaObject::invokeMethod(st, "Seek", Qt::QueuedConnection, Q_ARG(unsigned int, sourcePTS));	
+					// QMetaObject::invokeMethod(st, "Seek", Qt::QueuedConnection, Q_ARG(unsigned int, sourcePTS));
 				}
 			}
 		}
@@ -278,12 +278,12 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 		m_SeekingPTS = INVALID_PTS;
 	}
 
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		if (vv->GetType() == PLUGIN_TRANSFORM)
 		{
-			VideoQueue::Frame* ref  = vv->GetRefVideoQueue()->GetLastRenderFrame();			
+			VideoQueue::Frame* ref  = vv->GetRefVideoQueue()->GetLastRenderFrame();
 			if (!ref)
 			{
 				continue;
@@ -291,7 +291,7 @@ bool VideoViewList::GetRenderFrameList( QList<Render_Frame>& frameList, unsigned
 
 			FormatPtr transformFormat = FormatPtr(new FormatImpl);
 			vv->GetTransform()->GetFormat(ref->source->Format(), vv->GetOutputName(), transformFormat);
-			
+
 			VideoQueue::Frame* vqf = vv->GetVideoQueue()->GetSourceFrame(transformFormat);
 			if (vqf != NULL && vqf->source != NULL && vqf->render != NULL )
 			{
@@ -342,11 +342,11 @@ public:
 void VideoViewList::OnVideoViewTransformTriggered( QAction* action, VideoView* vv, TransformActionData *data)
 {
 	bool hasView = false;
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		// VideoView* vv2 = m_VideoList.at(i);
 		/*
-		if (vv2->GetType() == PLUGIN_TRANSFORM && vv2->GetRefVideoQueue() == 
+		if (vv2->GetType() == PLUGIN_TRANSFORM && vv2->GetRefVideoQueue() ==
 			vv->GetVideoQueue() && vv2->GetOutputName() == data->outputName)
 		{
 			hasView = true;
@@ -368,7 +368,7 @@ void VideoViewList::OnVideoViewTransformTriggered( QAction* action, VideoView* v
 
 void VideoViewList::OnSceneRendered( FrameListPtr scene, unsigned int pts, bool seeking )
 {
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		vv->ClearLastFrame();
@@ -387,34 +387,34 @@ void VideoViewList::OnSceneRendered( FrameListPtr scene, unsigned int pts, bool 
 
 VideoView* VideoViewList::find( unsigned int id ) const
 {
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		if (vv->GetID() == id)
 		{
 			return vv;
 		}
-	}	
+	}
 	return NULL;
 }
 
 UintList VideoViewList::GetSourceIDList() const
 {
 	UintList lst;
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		if (vv->GetType() == PLUGIN_SOURCE)
 		{
 			lst.append(vv->GetID());
-		}		
+		}
 	}
 	return lst;
 }
 
 void VideoViewList::OnViewPortUpdated( VideoView* _vv, double x, double y )
 {
-	for (int i=0; i<m_VideoList.size(); ++i) 
+	for (int i=0; i<m_VideoList.size(); ++i)
 	{
 		VideoView* vv = m_VideoList.at(i);
 		if (vv != _vv)
@@ -433,7 +433,7 @@ void VideoViewList::UpdateRenderLayout()
 		UintList ids;
 		RectList srcRects;
 		RectList dstRects;
-		for (int i=0; i<m_VideoList.size(); ++i) 
+		for (int i=0; i<m_VideoList.size(); ++i)
 		{
 			VideoView* vv = m_VideoList.at(i);
 
@@ -477,7 +477,7 @@ void VideoViewList::VideoFormatReset()
 	m_MergedTimeStamps.append(0);
 	m_Duration = 0;
 
-	for (int i=0; i<size(); ++i) 
+	for (int i=0; i<size(); ++i)
 	{
 		VideoView* vv = at(i);
 		SourceThread* st = vv->GetSourceThread();
@@ -508,9 +508,9 @@ void VideoViewList::CreateRenderer()
 
 	m_RenderThread = new RenderThread(m_RenderWidget->GetRenderer(), &m_Control);
 
-	connect(m_ProcessThread, SIGNAL(sceneReady(FrameListPtr, unsigned int, bool)), 
+	connect(m_ProcessThread, SIGNAL(sceneReady(FrameListPtr, unsigned int, bool)),
 		m_RenderThread, SLOT(RenderScene(FrameListPtr, unsigned int, bool)));
-	connect(m_RenderThread, SIGNAL(sceneRendered(FrameListPtr, unsigned int, bool)), 
+	connect(m_RenderThread, SIGNAL(sceneRendered(FrameListPtr, unsigned int, bool)),
 		this, SLOT(OnSceneRendered(FrameListPtr, unsigned int, bool)));
 
 	m_RenderThread->Start();
@@ -522,7 +522,7 @@ void VideoViewList::DestroyRenderer()
 	if (m_RenderThread->isRunning())
 	{
 		m_RenderThread->Stop();
-	}	
+	}
 
 	SAFE_DELETE(m_RenderThread);
 	m_ProcessThread->Stop();

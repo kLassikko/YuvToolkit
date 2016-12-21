@@ -20,7 +20,7 @@ class VideoQueue
 {
 };
 
-struct TransformActionData 
+struct TransformActionData
 {
 	YTPlugIn* transformPlugin;
 	QString transformName;
@@ -43,7 +43,7 @@ private:
 	void UnInit();
 public:
 	VideoView(QMainWindow* _mainWin, unsigned int viewId, RendererWidget* _parent, ProcessThread* processThread, PlaybackControl* control);
-	
+
 	virtual ~VideoView();
 	QRect srcRect, dstRect;
 
@@ -55,7 +55,7 @@ public:
 	PLUGIN_TYPE GetType() {return m_Type;}
 	Source* GetSource();
 	SourceInfo* GetSourceInfo() {return (m_Type == PLUGIN_SOURCE)?&m_SourceInfo:NULL;}
-	SourceThread* GetSourceThread() {return m_SourceThread;} 
+	SourceThread* GetSourceThread() {return m_SourceThread;}
 	Transform* GetTransform() {return m_Transform; }
 	VideoQueue* GetVideoQueue() {return NULL;}
 	QString GetOutputName() {return m_OutputName; }
@@ -65,13 +65,13 @@ public:
 	FramePtr GetLastFrame() {return m_LastFrame;}
 	void SetLastFrame(FramePtr f);
 	void ClearLastFrame() {m_LastFrame.clear();}
-	
+
 	void GetVideoSize( QSize& actual, QSize& display);
 
-	// Update view point to ensure that this region is 
+	// Update view point to ensure that this region is
 	void UpdateViewPort(double x, double y);
-	
-	// 
+
+	//
 	void OnMouseMoveEvent( const QPoint& pt);
 	void OnMousePressEvent( const QPoint& pt );
 	void OnMouseReleaseEvent( const QPoint& pt);
@@ -121,13 +121,13 @@ private:
 
 	QMenu* m_Menu;
 	QAction* m_CloseAction;
-	
+
 	unsigned int m_ViewID;
 	FramePtr m_LastFrame;
 
 	int m_ScaleNum, m_ScaleDen;
 	int m_SrcLeft, m_SrcTop, m_SrcWidth, m_SrcHeight;
-	
+
 	QDockWidget *m_Dock;
 	QWidget* m_PluginGUI;
 

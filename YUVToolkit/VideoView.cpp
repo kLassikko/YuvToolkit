@@ -47,8 +47,8 @@ void VideoView::Init( const char* path)
 	connect(m_SourceThread, SIGNAL(sourceReset()), this, SLOT(OnSourceReset()));
 
 	UpdateMenu();
-	
-	
+
+
 	m_SourceThread->GetSource()->GetInfo(m_SourceInfo);
 	emit ResolutionChanged();
 }
@@ -107,7 +107,7 @@ void VideoView::SetZoomLevel( int mode )
 	{
 	case 0:
 		m_ScaleNum = 1;
-		m_ScaleDen = 2;		
+		m_ScaleDen = 2;
 		break;
 	case 1:
 		m_ScaleNum = 1;
@@ -123,7 +123,7 @@ void VideoView::SetZoomLevel( int mode )
 		break;
 	case 4:
 		m_ScaleNum = 0;
-		m_ScaleDen = 0;		
+		m_ScaleDen = 0;
 		break;
 	}
 
@@ -146,7 +146,7 @@ void VideoView::RepositionVideo(bool emitSignal)
 
 	m_SrcWidth = width();
 	m_SrcHeight = height();
-	
+
 	if (m_ScaleDen == 0 || m_ScaleNum == 0)
 	{
 		// fit to window
@@ -156,7 +156,7 @@ void VideoView::RepositionVideo(bool emitSignal)
 		dstTop = rcClient.top()+(rcClient.height()-dstHeight)/2;
 
 		m_SrcLeft = 0;
-		m_SrcTop = 0;			
+		m_SrcTop = 0;
 	}
 	else
 	{
@@ -301,7 +301,7 @@ void VideoView::UpdateViewPort( double x, double y )
 
 void VideoView::UpdateTransformActionList()
 {
-	
+
 }
 
 void VideoView::close()
@@ -314,7 +314,7 @@ void VideoView::OnTransformTriggered()
 	QAction* action = qobject_cast<QAction*>(QObject::sender());
 
 	TransformActionData* data = (TransformActionData*)action->data().value<void *>();
-	
+
 	emit TransformTriggered(action, this, data);
 }
 
@@ -325,7 +325,7 @@ void VideoView::ShowGui(Source* source, bool show)
 		if (source && source->HasGUI())
 		{
 			m_Dock = new QDockWidget("Video Source Options", m_MainWindow);
-			//m_Dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);		
+			//m_Dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
 			m_Dock->setAllowedAreas(NULL);
 
 			m_PluginGUI = source->CreateGUI(m_Dock);
@@ -340,7 +340,7 @@ void VideoView::ShowGui(Source* source, bool show)
 			connect(m_Dock, SIGNAL(visibilityChanged(bool)), this, SLOT(OnDockFloating(bool)));
 		}
 	}
-	
+
 	if (m_Dock && show)
 	{
 		m_Dock->setVisible(true);
@@ -418,7 +418,7 @@ int VideoView::width()
 	{
 		return 0;
 	}
-	
+
 }
 
 int VideoView::height()
@@ -453,7 +453,7 @@ void VideoView::SetLastFrame( FramePtr f )
 	{
 		m_SourceInfo.format = FormatPtr(new FormatImpl);
 	}
-	
+
 	if (*(m_SourceInfo.format) != *(f->Format()))
 	{
 		*(m_SourceInfo.format) = *(f->Format());

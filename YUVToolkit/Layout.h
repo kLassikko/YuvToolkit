@@ -30,7 +30,7 @@ public:
 protected:
 	void UpdateGrid();
 private slots:
-	
+
 private:
 	QWidget* parent;
 
@@ -38,7 +38,7 @@ private:
 	QMap<unsigned short, VideoView*> m_VideoGrid;
 	unsigned short m_CountX; // number of video in x axis
 	unsigned short m_CountY; // number of video in y axis
-	
+
 
 	VideoView* m_ActiveVidew;
 	unsigned short m_ActiveX;

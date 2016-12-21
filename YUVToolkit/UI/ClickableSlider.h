@@ -3,7 +3,7 @@
 
 #include <QtGui>
 
-class QClickableSlider : public QSlider 
+class QClickableSlider : public QSlider
 {
 	Q_OBJECT;
 
@@ -35,7 +35,7 @@ public:
 protected:
 	void mousePressEvent ( QMouseEvent * event )
 	{
-		if (event->button() == Qt::LeftButton) 
+		if (event->button() == Qt::LeftButton)
 		{
 			if (orientation() == Qt::Vertical)
 			{
@@ -66,7 +66,7 @@ protected:
 			rcClient.setBottom(rcClient.top()+3);
 			painter.drawRect(rcClient);
 		}
-		
+
 
 		QSlider::paintEvent(ev);
 	}

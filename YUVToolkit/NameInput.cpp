@@ -4,7 +4,7 @@ NameInput::NameInput()
 {
 	ui.setupUi(this);
 	this->setWindowFlags(0);
-	this->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint); 
+	this->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 }
 
 NameInput::~NameInput()
